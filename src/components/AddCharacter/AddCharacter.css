@@ -1,0 +1,11 @@
+.AddCharacter {
+  height: 80px;
+}
+
+.AddCharacter > * {
+  height: 100%;
+}
+
+.AddCharacter div[type=radio] {
+  border-color: gray;
+}
