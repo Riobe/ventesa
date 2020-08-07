@@ -16,9 +16,19 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "react-spring": "^8.0.27"
+    "react-spring": "^8.0.27",
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addon-storysource": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/react": "^5.3.19",
+    "@storybook/theming": "^5.3.19",
     "concurrently": "^5.2.0",
     "electron": "^9.0.5"
   },
@@ -28,7 +38,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "react": "react-scripts start",
-    "electron": "electron ."
+    "electron": "electron .",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"

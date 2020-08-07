@@ -7,37 +7,46 @@ const CharacterDispatchContext = createContext();
 function sortByInitiative(characters) {
   const sorted = characters.slice().sort((l, r) => r.initiative - l.initiative);
   characters.forEach(char => {
-    char.initiativeRank = sorted.findIndex(sortedChar => sortedChar.name === char.name);
+    char.initiativeRank = sorted.findIndex(
+      sortedChar => sortedChar.name === char.name,
+    );
   });
 
   return characters;
 }
 
 function findNextTurnIndex(characters) {
-  return characters.reduce((result, char, i) => {
-    if (char.hasHadTurn) {
+  return characters.reduce(
+    (result, char, i) => {
+      if (char.hasHadTurn) {
+        return result;
+      }
+
+      if (char.initiativeRank < result.initiativeRank) {
+        return {
+          initiativeRank: char.initiativeRank,
+          index: i,
+        };
+      }
+
       return result;
-    }
-
-    if (char.initiativeRank < result.initiativeRank) {
-      return {
-        initiativeRank: char.initiativeRank,
-        index: i
-      };
-    }
-
-    return result;
-  }, {
-    initiativeRank: Infinity,
-    index: 0
-  }).index;
+    },
+    {
+      initiativeRank: Infinity,
+      index: 0,
+    },
+  ).index;
 }
 
 function characterReducer(state, action) {
   return produce(state, draft => {
     switch (action.type) {
       case 'add':
-        if (draft.characters.findIndex(char => char.name === action.character.name) > -1) {
+        if (
+          draft.characters.findIndex(
+            char => char.name === action.character.name,
+          ) > -1
+        ) {
           return;
         }
 
@@ -71,12 +80,23 @@ function characterReducer(state, action) {
             if (char.isPlayer) {
               let motesAvailable = 5;
               if (char.personalMotes < char.personalMotesMax) {
-                motesAvailable = 5 - Math.min(char.personalMotesMax - char.personalMotes, motesAvailable);
+                motesAvailable =
+                  5 -
+                  Math.min(
+                    char.personalMotesMax - char.personalMotes,
+                    motesAvailable,
+                  );
                 char.personalMotes = char.personalMotes + (5 - motesAvailable);
               }
 
-              if (motesAvailable && char.peripheralMotes < char.peripheralMotesMax) {
-                char.peripheralMotes = Math.min(char.peripheralMotes + motesAvailable, char.peripheralMotesMax);
+              if (
+                motesAvailable &&
+                char.peripheralMotes < char.peripheralMotesMax
+              ) {
+                char.peripheralMotes = Math.min(
+                  char.peripheralMotes + motesAvailable,
+                  char.peripheralMotesMax,
+                );
               }
             } else {
               char.motes = Math.min(char.motes + 5, char.motesMax);
@@ -103,27 +123,42 @@ function characterReducer(state, action) {
         draft.characters[draft.currentTurnIndex].isTurn = true;
         break;
 
+      case 'modify-soak':
+        draft[action.name].soak = parseInt(action.value, 10);
+        break;
+
       case 'modify-character': {
-        const index = draft.characters.findIndex(char => char.name === action.name);
+        const index = draft.characters.findIndex(
+          char => char.name === action.name,
+        );
         const char = draft.characters[index];
-        if (typeof char[action.property] !== typeof action.value || isNaN(action.value)) {
+        if (
+          typeof char[action.property] !== typeof action.value ||
+          isNaN(action.value)
+        ) {
           break;
         }
 
         switch (action.property) {
           case 'personalMotes':
-            char[action.property] = Math.min(action.value, char.personalMotesMax);
+            char[action.property] = Math.min(
+              action.value,
+              char.personalMotesMax,
+            );
             break;
 
           case 'peripheralMotes':
-            char[action.property] = Math.min(action.value, char.peripheralMotesMax);
+            char[action.property] = Math.min(
+              action.value,
+              char.peripheralMotesMax,
+            );
             break;
 
           // In this case, fix the defense, then do the set like normal.
           case 'parry':
           case 'evasion':
             char.defense = Math.max(char.parry, char.evasion, action.value);
-            // falls through
+          // falls through
 
           default:
             char[action.property] = action.value;
@@ -137,25 +172,27 @@ function characterReducer(state, action) {
           sortByInitiative(draft.characters);
 
           if (currentName) {
-            draft.currentTurnIndex = draft.characters.findIndex(char => char.name === currentName);
+            draft.currentTurnIndex = draft.characters.findIndex(
+              char => char.name === currentName,
+            );
           }
         }
 
         if (action.property === 'exaltType') {
           switch (action.value) {
             case 'solar':
-              char.personalMotesMax = (char.essence * 3) + 10;
-              char.peripheralMotesMax = (char.essence * 7) + 26;
+              char.personalMotesMax = char.essence * 3 + 10;
+              char.peripheralMotesMax = char.essence * 7 + 26;
               break;
 
             case 'lunar':
               char.personalMotesMax = 15 + char.essence;
-              char.peripheralMotesMax = (char.essence * 4) + 34;
+              char.peripheralMotesMax = char.essence * 4 + 34;
               break;
 
             case 'terrestrial':
               char.personalMotesMax = 11 + char.essence;
-              char.peripheralMotesMax = (char.essence * 4) + 26;
+              char.peripheralMotesMax = char.essence * 4 + 26;
               break;
 
             default:
@@ -187,32 +224,51 @@ function characterReducer(state, action) {
 }
 
 function CharacterProvider({ children }) {
-  const [state, dispatch] = useReducer(characterReducer, {
-    characters: [],
-    targetInitiative: undefined,
-    currentTurnIndex: undefined,
-    currentRound: undefined
-  });
+  // Object.keys(state).forEach(char => {
+  // state[char].hasTurn = false;
+  // state[char].isTurn = false;
+  // });
 
-  return (
-    <CharacterContext.Provider value={state}>
-      <CharacterDispatchContext.Provider value={dispatch}>
-        {children}
-      </CharacterDispatchContext.Provider>
-    </CharacterContext.Provider>
-  );
+  // const [state, dispatch] = useReducer(characterReducer, {
+  // riobe: {
+  // [> ... riobe data <]
+  // },
+  // karth: {
+  // [> ... karth data <]
+  // },
+  // });
+
+  // const [battleState, dispatch] = useReducer(battleReducer, {
+  // targetInitiative: undefined,
+  // inInitOrderCharacters: ['riobe', 'karth'],
+  // currentRound: undefined,
+  // isStarted: false
+  // });
+
+  inInitOrderCharacters = Object.values(state)
+    .filter(hasNotHadTurn)
+    .return(
+      <CharacterContext.Provider value={state}>
+        <CharacterDispatchContext.Provider value={dispatch}>
+          {children}
+        </CharacterDispatchContext.Provider>
+      </CharacterContext.Provider>,
+    );
 }
-
 
 function useCharacters() {
   const characterContext = useContext(CharacterContext);
   if (characterContext === undefined) {
-    throw new Error('useCharacterContext must be used within a CharacterProvider');
+    throw new Error(
+      'useCharacterContext must be used within a CharacterProvider',
+    );
   }
 
   const characterDispatchContext = useContext(CharacterDispatchContext);
   if (characterDispatchContext === undefined) {
-    throw new Error('useCharacterContext must be used within a CharacterProvider');
+    throw new Error(
+      'useCharacterContext must be used within a CharacterProvider',
+    );
   }
 
   return [characterContext, characterDispatchContext];

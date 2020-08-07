@@ -1,54 +1,62 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 
-import './Layout.css';
+import NavButton from '../NavButton';
+import VerticalDivider from '../VerticalDivider';
 
-import { useCharacters } from '../../lib/CharacterContext';
-import Character from '../../lib/Character';
-import { ATTACK_TYPE } from '../../lib/constants';
+const LayoutGrid = styled.div`
+  margin: 0 auto;
+  display: grid;
 
-import AddCharacter from '../AddCharacter';
-import Field from '../Field';
+  min-width: 768px;
+  max-width: 1024px;
 
-const rio = new Character({
-  name: 'Riobe',
-  soak: 5,
-  parry: 2,
-  evasion: 4,
-  initiative: 10,
-  isPlayer: true
-});
-rio.addAttack('Broadsword', { type: ATTACK_TYPE.ARTIFACT_LIGHT_MELEE });
+  grid:
+    min-content min-content auto /
+    3fr 1fr;
+  grid-template-areas:
+    'main-nav  main-nav'
+    'sub-nav   sub-nav'
+    'main     related';
 
-const aeon = new Character({
-  name: 'Aeon',
-  soak: 1,
-  parry: 3,
-  evasion: 1,
-  initiative: 9,
-  isPlayer: false,
-  motesMax: 30
-});
-aeon.addAttack('Fists', { type: ATTACK_TYPE.UNARMED });
+  & > * {
+    border: 1px dashed cyan;
+  }
+`;
+
+const MainNav = styled.header`
+  grid-area: main-nav;
+
+  height: 2rem;
+
+  display: flex;
+`;
+
+const SubNav = styled.header`
+  grid-area: sub-nav;
+`;
+
+const MainContent = styled.main`
+  grid-area: main;
+`;
+
+const RelatedInformation = styled.aside`
+  grid-area: related;
+`;
 
 function Layout() {
-  const [, charDispatch] = useCharacters();
-
-  useEffect(() => {
-    charDispatch({
-      type: 'add',
-      character: rio
-    });
-    charDispatch({
-      type: 'add',
-      character: aeon
-    });
-  }, [charDispatch]);
-
   return (
-    <div id="Layout">
-      <AddCharacter />
-      <Field />
-    </div>
+    <LayoutGrid id="Layout">
+      <MainNav>
+        <NavButton>Characters</NavButton>
+        <NavButton>Battle</NavButton>
+        <VerticalDivider />
+        <NavButton>Viewed Characters</NavButton>
+      </MainNav>
+      <SubNav>Secondary Nav</SubNav>
+      <MainContent>Main Content</MainContent>
+      <RelatedInformation>Related Information</RelatedInformation>
+    </LayoutGrid>
   );
 }
 
