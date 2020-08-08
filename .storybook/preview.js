@@ -38,7 +38,18 @@ addParameters({
   options: {
     storySort: {
       method: 'alphabetical',
-      order: ['Docs', 'Components', ['Dot', 'DotGroup']],
+      order: [
+        'Docs',
+        [
+          'Welcome',
+          'Getting Started',
+          'Adding a Component',
+          'Linting',
+          'Testing',
+          'Storybook',
+        ],
+        'Components',
+      ],
       locales: 'en-US',
     },
   },
