@@ -1,11 +1,23 @@
-const Character = require('./Character');;
-const { ATTACK_TYPE, DAMAGE_TYPE } = require('./constants');;
+const Character = require('./Character');
+const { ATTACK_TYPE, DAMAGE_TYPE } = require('./constants');
 const { roll } = require('./roller');
 
-const rio = new Character({ name: 'Riobe', soak: 5, parry: 2, evasion: 4, initiative: 10 });
+const rio = new Character({
+  name: 'Riobe',
+  soak: 5,
+  parry: 2,
+  evasion: 4,
+  initiative: 10,
+});
 rio.addAttack('Broadsword', { type: ATTACK_TYPE.ARTIFACT_LIGHT_MELEE });
 
-const aeon = new Character({ name: 'Aeon', soak: 1, parry: 3, evasion: 1, initiative: 10 });
+const aeon = new Character({
+  name: 'Aeon',
+  soak: 1,
+  parry: 3,
+  evasion: 1,
+  initiative: 10,
+});
 aeon.addAttack('Fists', { type: ATTACK_TYPE.UNARMED });
 
 console.log(`Rio: ${rio.initiative} | Aeon: ${aeon.initiative}`);
@@ -17,7 +29,11 @@ const result = roll(damagePool).successes;
 console.log('Rio damaged for:', result);
 
 rio.withering(result, aeon);
-console.log(`Rio: ${rio.initiative} (+${result + 1}) | Aeon: ${aeon.initiative} (-${result})`);
+console.log(
+  `Rio: ${rio.initiative} (+${result + 1}) | Aeon: ${
+    aeon.initiative
+  } (-${result})`,
+);
 
 console.log();
 
@@ -27,7 +43,9 @@ console.log(rio.consoleHealthLevels);
 const aggrevatedDamage = 2;
 const lethalDamage = 1;
 const bashingDamage = 3;
-console.log(`Dealing ${aggrevatedDamage + lethalDamage + bashingDamage} damage to Riobe`);
+console.log(
+  `Dealing ${aggrevatedDamage + lethalDamage + bashingDamage} damage to Riobe`,
+);
 
 console.log('Riobe Health After Bashing Damage');
 rio.damage(bashingDamage, DAMAGE_TYPE.BASHING);

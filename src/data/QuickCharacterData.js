@@ -1,9 +1,17 @@
 const { immerable } = require('immer');
 
-const AttackType = require('../enums/attack-type');
 const DamageType = require('../enums/damage-type');
+const AttackData = require('./AttackData');
 
 const { defaultHealthLevels } = require('../lib/health-levels');
+
+const emptyEffects = {
+  defenseMod: 0,
+  woundPenaltyMod: 0,
+  parryMod: 0,
+  evasionMod: 0,
+  attackMod: 0,
+};
 
 class QuickCharacterData {
   constructor(name) {
@@ -45,13 +53,7 @@ class QuickCharacterData {
     // Modifiers
     this.weaponDefenseBonus = 0;
     this.conditions = [];
-    this.effects = {
-      defenseMod: 0,
-      woundPenaltyMod: 0,
-      parryMod: 0,
-      evasionMod: 0,
-      attackMod: 0
-    };
+    this.effects = { ...emptyEffects };
   }
 
   addAttack(attack) {
@@ -59,11 +61,11 @@ class QuickCharacterData {
       throw new Error('An attack must have a name.');
     }
 
-    if (this.attacks[name]) {
+    if (this.attacks[attack.name]) {
       throw new Error('An attack must have a unique name on a character.');
     }
 
-    if (!(attack instanceof Attack)) {
+    if (!(attack instanceof AttackData)) {
       throw new Error('attack must be an instanceof Attack');
     }
 
@@ -96,7 +98,7 @@ class QuickCharacterData {
   removeCondition(name) {
     // TODO: Add validation
     const conditionIndex = this.conditions.findIndex(
-      condition => condition.name === name
+      condition => condition.name === name,
     );
 
     // TODO: Make immutable?
@@ -113,11 +115,10 @@ class QuickCharacterData {
         result.parryMod += condition.parryMod;
         result.evasionMod += condition.evasionMod;
         result.attackMod += condition.attackMod;
+
+        return result;
       },
-      {
-        defenseMod: 0,
-        woundPenaltyMod: 0
-      }
+      { ...emptyEffects },
     );
 
     this.effects = effects;

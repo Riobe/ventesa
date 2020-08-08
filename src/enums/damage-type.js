@@ -2,7 +2,7 @@ const DamageType = {
   NONE: '',
   BASHING: 'BASHING',
   LETHAL: 'LETHAL',
-  AGGREVATED: 'AGGREVATED'
+  AGGREVATED: 'AGGREVATED',
 };
 
 module.exports = DamageType;

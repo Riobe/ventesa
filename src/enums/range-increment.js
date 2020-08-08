@@ -3,7 +3,7 @@ const RangeIncrement = {
   short: 'short',
   medium: 'medium',
   long: 'long',
-  extreme: 'extreme'
+  extreme: 'extreme',
 };
 
 module.exports = RangeIncrement;

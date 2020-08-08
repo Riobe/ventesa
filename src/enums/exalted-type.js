@@ -10,7 +10,7 @@ const ExaltedType = {
   GETIMIAN: 'GETIMIAN',
   EXIGENT: 'EXIGENT',
   // For unknown exalted type.
-  CHOSEN: 'CHOSEN'
+  CHOSEN: 'CHOSEN',
 };
 
 module.exports = ExaltedType;

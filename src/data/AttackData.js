@@ -1,4 +1,3 @@
-const DefenseCalculation = require('../enums/defence-calculation');
 const RangeIncrement = require('../enums/range-increment');
 const Abilities = require('../enums/abilities');
 const Attributes = require('../enums/attributes');
@@ -15,7 +14,7 @@ class AttackData {
     extraDamage = 0,
     extraDefense = 0,
     extraOverwhelming = 0,
-    specialized = false
+    specialized = false,
   }) {
     if (!name) {
       throw new Error('Cannot create an Attack without a name.');
@@ -32,7 +31,7 @@ class AttackData {
       (type.overwhelming < 1 && extraOverwhelming < 1)
     ) {
       throw new Error(
-        'Must have both damage and overwhelming defined to make an Attack.'
+        'Must have both damage and overwhelming defined to make an Attack.',
       );
     }
 
@@ -55,6 +54,7 @@ class AttackData {
     this.extraOverwhelming = extraOverwhelming;
 
     this.specialized = specialized;
+    this.range = range;
   }
 }
 

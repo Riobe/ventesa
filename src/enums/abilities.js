@@ -23,7 +23,7 @@ const Abilities = {
   stealth: 'stealth',
   survival: 'survival',
   thrown: 'thrown',
-  war: 'war'
+  war: 'war',
 };
 
 module.exports = Abilities;

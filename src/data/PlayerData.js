@@ -15,7 +15,7 @@ const emptyEffects = {
   woundPenaltyMod: 0,
   parryMod: 0,
   evasionMod: 0,
-  attackMod: 0
+  attackMod: 0,
 };
 
 class PlayerData {
@@ -35,7 +35,7 @@ class PlayerData {
     this.hardness = 0;
 
     // Exalt Type/Resources
-    this.exaltType = 'solar';
+    this.exaltType = exaltType;
     this.willpower = 5;
     this.recalcMotes();
 
@@ -70,8 +70,8 @@ class PlayerData {
       new AttackData({
         name: 'Unarmed',
         type: AttackType.UNARMED,
-        ability: Abilities.brawl
-      })
+        ability: Abilities.brawl,
+      }),
     );
 
     // Modifiers
@@ -95,7 +95,7 @@ class PlayerData {
   recalcMotes() {
     const { personal, peripherial } = getMoteMaxes(
       this.exaltType,
-      this.essence
+      this.essence,
     );
     this.personalMotesMax = personal;
     this.personalMotes = this.personalMotesMax;
@@ -142,7 +142,7 @@ class PlayerData {
     }
 
     const conditionIndex = this.conditions.findIndex(
-      existingCondition => existingCondition.name === condition.name
+      existingCondition => existingCondition.name === condition.name,
     );
 
     if (conditionIndex === -1) {
@@ -157,7 +157,7 @@ class PlayerData {
   removeCondition(name) {
     // TODO: Add validation
     const conditionIndex = this.conditions.findIndex(
-      condition => condition.name === name
+      condition => condition.name === name,
     );
 
     // TODO: Make immutable?
@@ -182,7 +182,7 @@ class PlayerData {
 
         return result;
       },
-      { ...emptyEffects }
+      { ...emptyEffects },
     );
 
     console.log('calced effects', effects);

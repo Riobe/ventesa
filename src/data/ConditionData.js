@@ -8,7 +8,7 @@ class ConditionData {
     parryMod = 0,
     evasionMod = 0,
     attackMod = 0,
-    durationInRounds = 1
+    durationInRounds = 1,
   }) {
     this.name = name;
 

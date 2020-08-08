@@ -21,15 +21,14 @@ function getMoteMaxes(exaltType, essence) {
     case ExaltType.INFERNAL:
       return {
         personal: essence * 3 + 10,
-        peripherial: essence * 7 + 26
+        peripherial: essence * 7 + 26,
       };
 
     case ExaltType.LUNAR:
       return {
         personal: 15 + essence,
-        peripherial: essence * 4 + 34
+        peripherial: essence * 4 + 34,
       };
-      break;
 
     // Defaulting to TERRESTRIAL until we know other forumlas.
     case ExaltType.TERRESTRIAL:
@@ -41,17 +40,17 @@ function getMoteMaxes(exaltType, essence) {
     case ExaltType.CHOSEN:
       return {
         personal: 11 + essence,
-        peripherial: essence * 4 + 26
+        peripherial: essence * 4 + 26,
       };
 
     default:
       return {
         personal: 0,
-        peripherial: 0
+        peripherial: 0,
       };
   }
 }
 
 module.exports = {
-  getMoteMaxes
+  getMoteMaxes,
 };

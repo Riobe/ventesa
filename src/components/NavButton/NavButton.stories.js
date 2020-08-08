@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ThemeProvider, useTheme } from '@chakra-ui/core';
-import customTheme from '../../theme';
 
 import NavButton from './NavButton';
 import VerticalDivider from '../VerticalDivider';
@@ -16,11 +14,7 @@ export default {
 };
 
 // Stories
-export const Example = () => {
-  const theme = useTheme();
-
-  return <NavButton>Button</NavButton>;
-};
+export const Example = () => <NavButton>Button</NavButton>;
 
 export const Really_Long_Text = () => (
   <NavButton>

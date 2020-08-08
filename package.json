@@ -5,7 +5,8 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "eslint --fix ."
+      "pre-commit": "eslint --fix .",
+      "pre-push": "CI=true react-scripts test --env=jsdom"
     }
   },
   "dependencies": {

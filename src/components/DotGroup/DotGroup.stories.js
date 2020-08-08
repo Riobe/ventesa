@@ -36,7 +36,7 @@ export const Example = () => (
 
 export const Attribute = () => {
   const [value, setValue] = useState(1);
-  const clickableValueChanged = useCallback(action('onValueChange'));
+  const onValueChange = useCallback(action('onValueChange'));
 
   return (
     <HorizontalDiv>
@@ -46,7 +46,7 @@ export const Attribute = () => {
         includeZero={false}
         onValueChange={value => {
           setValue(value);
-          ValueChanged(value);
+          onValueChange(value);
         }}
       />
     </HorizontalDiv>
@@ -55,7 +55,7 @@ export const Attribute = () => {
 
 export const Ability = () => {
   const [value, setValue] = useState(1);
-  const clickableValueChanged = useCallback(action('onValueChange'));
+  const onValueChange = useCallback(action('onValueChange'));
 
   return (
     <HorizontalDiv>
@@ -65,7 +65,7 @@ export const Ability = () => {
         includeZero={true}
         onValueChange={value => {
           setValue(value);
-          ValueChanged(value);
+          onValueChange(value);
         }}
       />
     </HorizontalDiv>
@@ -74,7 +74,7 @@ export const Ability = () => {
 
 export const Familiar_Merit = () => {
   const [value, setValue] = useState(1);
-  const clickableValueChanged = useCallback(action('onValueChange'));
+  const onValueChange = useCallback(action('onValueChange'));
 
   return (
     <HorizontalDiv>
@@ -85,7 +85,7 @@ export const Familiar_Merit = () => {
         maxDots={3}
         onValueChange={value => {
           setValue(value);
-          ValueChanged(value);
+          onValueChange(value);
         }}
       />
     </HorizontalDiv>

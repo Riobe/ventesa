@@ -8,7 +8,7 @@ function defaultHealthLevels() {
     { woundPenalty: -2, taken: DamageType.NONE },
     { woundPenalty: -2, taken: DamageType.NONE },
     { woundPenalty: -4, taken: DamageType.NONE },
-    { woundPenalty: -Infinity, taken: DamageType.NONE }
+    { woundPenalty: -Infinity, taken: DamageType.NONE },
   ];
 }
 
@@ -60,7 +60,7 @@ function hurt(character, damage, type) {
     healthLevel.taken = type;
     character.woundPenalty = Math.max(
       character.woundPenalty,
-      healthLevel.woundPenalty
+      healthLevel.woundPenalty,
     );
     damage--;
 
@@ -76,16 +76,21 @@ function hurt(character, damage, type) {
   }
 }
 
-async function convert() {
+// TODO: Write function that can convert a character's health levels of one
+// type to another. This will allow things like health charms that turn
+// aggrevated damage into lethal damage to be accomplished.
+/*
+async function convert(fromType, toType) {
   try {
     const contents = await fs.readFile('sodifnapsodifnaposdifn');
   } catch (err) {}
 
   // TODO: Write function.
 }
+*/
 
 module.exports = {
   defaultHealthLevels,
   heal,
-  hurt
+  hurt,
 };

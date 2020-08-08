@@ -42,4 +42,6 @@ const NavButton = React.forwardRef((props, ref) => {
   return <NavButtonBase ref={ref} theme={theme} {...props} />;
 });
 
+NavButton.displayName = 'NavButton';
+
 export default NavButton;

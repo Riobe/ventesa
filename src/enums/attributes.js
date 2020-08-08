@@ -7,7 +7,7 @@ const Attributes = {
   wits: 'wits',
   charisma: 'charisma',
   manipulation: 'manipulation',
-  appearance: 'appearance'
+  appearance: 'appearance',
 };
 
 module.exports = Attributes;

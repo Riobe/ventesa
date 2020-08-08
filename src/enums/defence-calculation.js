@@ -2,7 +2,7 @@ const DefenseCalculation = {
   HIGHEST: 'HIGHEST',
   UNBLOCKABLE: 'UNBLOCKABLE',
   UNDODGEABLE: 'UNDODGEABLE',
-  NEGATED: 'NEGATED'
+  NEGATED: 'NEGATED',
 };
 
 module.exports = DefenseCalculation;
