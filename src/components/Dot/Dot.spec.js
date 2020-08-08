@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import Dot from './Dot';
 
 describe('Dot', () => {
-  it('should render successfully.', () => {
+  it('should render successfully.', async () => {
     const { getByRole } = render(<Dot />);
 
     const dot = getByRole('radio');
@@ -13,7 +13,7 @@ describe('Dot', () => {
     expect(dot).toHaveClass('Dot');
   });
 
-  it('should render empty by default.', () => {
+  it('should render empty by default.', async () => {
     const { getByRole } = render(<Dot />);
 
     const dot = getByRole('radio');
@@ -24,7 +24,7 @@ describe('Dot', () => {
     expect(dot).not.toBeChecked();
   });
 
-  it('should render a solid background if checked.', () => {
+  it('should render a solid background if checked.', async () => {
     const { getByRole } = render(<Dot checked={true} />);
 
     const dot = getByRole('radio');
@@ -35,7 +35,7 @@ describe('Dot', () => {
     expect(dot).toBeChecked();
   });
 
-  it('should render a solid background if checked.', () => {
+  it('should render with a dashed background if a zero dot.', async () => {
     const { getByRole } = render(<Dot zero={true} />);
 
     const dot = getByRole('radio');
