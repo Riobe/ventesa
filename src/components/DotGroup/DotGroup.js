@@ -29,13 +29,13 @@ const DotGroupContainer = styled.div.attrs({
  * interface with character's values in a familiar way that will be intuitive to anyone that's
  * looked an exalted character sheet.
  */
-function DotGroup({ value, includeZero, maxDots, onValueChange }) {
+function DotGroup({ value, zeroDot, maxDots, onValueChange }) {
   // Create an array with values 1 through 5.
   const dots = [...Array(maxDots).keys()].map(i => i + 1);
 
   return (
     <DotGroupContainer className="DotGroup">
-      {includeZero && <Dot zero={true} onClick={() => onValueChange(0)} />}
+      {zeroDot && <Dot zero={true} onClick={() => onValueChange(0)} />}
       {dots.map(dotValue => (
         <Dot
           key={dotValue}
@@ -49,14 +49,14 @@ function DotGroup({ value, includeZero, maxDots, onValueChange }) {
 
 DotGroup.propTypes = {
   value: PropTypes.number.isRequired,
-  includeZero: PropTypes.bool.isRequired,
+  zeroDot: PropTypes.bool.isRequired,
   maxDots: PropTypes.number.isRequired,
   onValueChange: PropTypes.func,
 };
 
 DotGroup.defaultProps = {
   value: 0,
-  includeZero: false,
+  zeroDot: false,
   maxDots: 5,
 };
 

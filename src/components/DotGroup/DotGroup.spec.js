@@ -16,4 +16,12 @@ describe('DotGroup', () => {
 
     expect(dots.length).toBe(5);
   });
+
+  it('should render an zero dot if told to.', () => {
+    const { getAllByTestId } = render(<DotGroup id="tested" zeroDot={true} />);
+
+    const dots = getAllByTestId('dot');
+
+    expect(dots.length).toBe(6);
+  });
 });
