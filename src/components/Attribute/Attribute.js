@@ -12,7 +12,7 @@ const AttributeRow = styled.div.attrs({
 `;
 
 const AttributeLabel = styled.label.attrs({
-  className: 'AttributeRow',
+  className: 'AttributeLabel',
 })`
   font-weight: 800;
 `;
