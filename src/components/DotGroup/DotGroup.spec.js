@@ -140,5 +140,15 @@ describe('DotGroup', () => {
 
       expect(onValueChange).toHaveBeenCalledWith(0);
     });
+
+    it('should perform no operation if a dot is clicked without a value changed event handler.', async () => {
+      const { getAllByRole } = render(<DotGroup zeroDot={true} />);
+
+      const dots = getAllByRole('radio');
+
+      expect(() => {
+        fireEvent.click(dots[0]);
+      }).not.toThrow();
+    });
   });
 });

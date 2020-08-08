@@ -39,15 +39,22 @@ function DotGroup({
 }) {
   // Create an array with values 1 through 5.
   const dots = [...Array(maxDots).keys()].map(i => i + 1);
+  const handleValueChanged = newValue => {
+    if (!onValueChange) {
+      return;
+    }
+
+    onValueChange(newValue);
+  };
 
   return (
     <DotGroupContainer className={`DotGroup ${className}`} {...props}>
-      {zeroDot && <Dot zero={true} onClick={() => onValueChange(0)} />}
+      {zeroDot && <Dot zero={true} onClick={() => handleValueChanged(0)} />}
       {dots.map(dotValue => (
         <Dot
           key={dotValue}
           checked={dotValue <= value}
-          onClick={() => onValueChange(dotValue)}
+          onClick={() => handleValueChanged(dotValue)}
         />
       ))}
     </DotGroupContainer>
