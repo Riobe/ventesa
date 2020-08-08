@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import DotGroup from './DotGroup';
 
 export default {
-  title: 'Presentation/DotGroup',
+  title: 'Components/DotGroup',
   component: DotGroup,
   parameters: {
     componentSubtitle:

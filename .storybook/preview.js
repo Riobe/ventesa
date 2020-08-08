@@ -1,9 +1,11 @@
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
-import { addDecorator, addParameters } from '@storybook/react';
-import { themes } from '@storybook/theming';
 import styled from 'styled-components';
 import { ThemeProvider, useTheme } from '@chakra-ui/core';
+
+import { withKnobs } from '@storybook/addon-knobs';
+import { addDecorator, addParameters, configure } from '@storybook/react';
+import { themes } from '@storybook/theming';
+
 import customTheme from '../src/theme';
 import exaltedBackgroundMap from '../src/images/exalted-bg-map.jpg';
 
@@ -29,10 +31,15 @@ addDecorator(story => (
   </ThemeProvider>
 ));
 
-addDecorator(withKnobs);
-
 addParameters({
-  options: {
+  docs: {
     theme: themes.dark,
+  },
+  options: {
+    storySort: {
+      method: 'alphabetical',
+      order: ['Docs', 'Components', ['Dot', 'DotGroup']],
+      locales: 'en-US',
+    },
   },
 });

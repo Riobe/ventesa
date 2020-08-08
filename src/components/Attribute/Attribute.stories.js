@@ -5,7 +5,7 @@ import { text, number } from '@storybook/addon-knobs';
 import Attribute from './Attribute';
 
 export default {
-  title: 'Presentation/Attribute',
+  title: 'Components/Attribute',
   component: Attribute,
   parameters: {
     componentSubtitle: 'An Attribute row for an Exalted character.',
@@ -13,7 +13,7 @@ export default {
 };
 
 // Stories
-export const Documentation = () => (
+export const Example = () => (
   <div
     style={{
       width:

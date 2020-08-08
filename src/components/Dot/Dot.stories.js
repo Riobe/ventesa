@@ -4,7 +4,7 @@ import { boolean } from '@storybook/addon-knobs';
 import Dot from './Dot';
 
 export default {
-  title: 'Presentation/Dot',
+  title: 'Components/Dot',
   component: Dot,
   parameters: {
     componentSubtitle: 'The basic Dot component of an Exalted character.',

@@ -5,7 +5,7 @@ import NavButton from './NavButton';
 import VerticalDivider from '../VerticalDivider';
 
 export default {
-  title: 'Presentation/NavButton',
+  title: 'Components/NavButton',
   component: NavButton,
   parameters: {
     componentSubtitle:
