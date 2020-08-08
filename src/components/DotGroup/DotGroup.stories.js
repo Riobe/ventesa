@@ -72,7 +72,7 @@ export const Ability = () => {
   );
 };
 
-export const Familiar_Merit = () => {
+export const Merit = () => {
   const [value, setValue] = useState(1);
   const onValueChange = useCallback(action('onValueChange'));
 
