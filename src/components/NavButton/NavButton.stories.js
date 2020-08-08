@@ -40,8 +40,8 @@ const HorizontalDiv = styled.div`
 
 export const Navigation_Buttons = () => (
   <HorizontalDiv>
-    <NavButton>Characters</NavButton>
-    <NavButton>Battle</NavButton>
+    <NavButton className="active">Characters</NavButton>
+    <NavButton data-hovr={true}>Battle</NavButton>
     <VerticalDivider />
     <NavButton>Keldan</NavButton>
     <NavButton>Kallista</NavButton>

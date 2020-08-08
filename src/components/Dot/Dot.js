@@ -4,7 +4,10 @@ import styled from 'styled-components';
 
 const defaultSize = '0.75rem';
 
-const DotDiv = styled.div`
+const DotDiv = styled.div.attrs({
+  className: 'Dot',
+  'data-testid': 'dot'
+})`
   width: ${defaultSize};
   height: ${defaultSize};
   border: 0.2rem solid black;

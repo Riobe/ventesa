@@ -2,10 +2,18 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import DotGroup from './DotGroup';
 
-it('should render successfully.', () => {
-  const className = 'test-class';
+describe('DotGroup', () => {
+  it('should render successfully.', () => {
+    const dotGroup = render(<DotGroup id="tested" />);
 
-  const dot = render(<DotGroup />);
+    expect(dotGroup).toBeTruthy();
+  });
 
-  expect(dot).toBeTruthy();
+  it('should have 5 dots by default.', () => {
+    const { getAllByTestId } = render(<DotGroup id="tested" />);
+
+    const dots = getAllByTestId('dot');
+
+    expect(dots.length).toBe(5);
+  });
 });

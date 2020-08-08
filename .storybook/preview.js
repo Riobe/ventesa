@@ -5,19 +5,22 @@ import { themes } from '@storybook/theming';
 import styled from 'styled-components';
 import { ThemeProvider, useTheme } from '@chakra-ui/core';
 import customTheme from '../src/theme';
+import exaltedBackgroundMap from '../src/images/exalted-bg-map.jpg';
 
 const CanvasElement = styled.main`
-  height: 100vh;
-  width: 100vw;
-
   background-color: ${({ theme }) => theme.colors.backgroundPrimary};
+  background: url(${exaltedBackgroundMap});
   padding: 10px;
 `;
 
 function Canvas({ children }) {
   const theme = useTheme();
 
-  return <CanvasElement theme={theme}>{children}</CanvasElement>;
+  return (
+    <CanvasElement className="Canvas" theme={theme}>
+      {children}
+    </CanvasElement>
+  );
 }
 
 addDecorator(story => (

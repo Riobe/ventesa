@@ -7,7 +7,7 @@ function witheringAccuracyRoll({ character, attackName }) {
     accuracy,
     ability,
     extraAccuracy,
-    specialized
+    specialized,
   } = attack;
 
   const accuracyAttributeValue = character.attributes[accuracyAttribute];
@@ -29,7 +29,7 @@ function witheringDamageRoll({
   attackName,
   successes,
   toChar,
-  defenseCalculation = DefenseCalculation.HIGHEST
+  defenseCalculation = DefenseCalculation.HIGHEST,
 }) {
   if (!DefenseCalculation[defenseCalculation]) {
     throw new Error('Invalid defense calculation.');
@@ -48,21 +48,11 @@ function witheringDamageRoll({
     damage,
     extraDamage,
     overwhelming,
-    extraOverwhelming
+    extraOverwhelming,
   } = attack;
 
   const thresholdSuccesses = successes - defense;
   const damageAttributeValue = fromChar.attributes[damageAttribute];
-
-  console.log('successes', successes);
-  console.log('defense', defense);
-  console.log('damageAttributeValue', damageAttributeValue);
-  console.log('damage', damage);
-  console.log('extraDamage', extraDamage);
-  console.log('thresholdSuccesses', thresholdSuccesses);
-  console.log('toChar.soak', toChar.soak);
-  console.log('overwhelming', overwhelming);
-  console.log('extraOverwhelming', extraOverwhelming);
 
   return Math.max(
     damageAttributeValue +
@@ -70,7 +60,7 @@ function witheringDamageRoll({
       extraDamage +
       thresholdSuccesses -
       toChar.soak,
-    overwhelming + extraOverwhelming
+    overwhelming + extraOverwhelming,
   );
 }
 
@@ -102,7 +92,7 @@ function witheringApplyDamage({ fromChar, toChar, damage }) {
 
 function calculateDefense(
   character,
-  defenseCalculation = DefenseCalculation.HIGHEST
+  defenseCalculation = DefenseCalculation.HIGHEST,
 ) {
   if (defenseCalculation === DefenseCalculation.NEGATED) {
     return 0;
@@ -113,7 +103,7 @@ function calculateDefense(
     case DefenseCalculation.HIGHEST:
       defense = Math.max(
         character.evasion,
-        character.parry + character.weaponDefenseBonus
+        character.parry + character.weaponDefenseBonus,
       );
       break;
 
@@ -136,5 +126,5 @@ module.exports = {
   witheringAccuracyRoll,
   witheringDamageRoll,
   witheringApplyDamage,
-  calculateDefense
+  calculateDefense,
 };
