@@ -18,6 +18,7 @@ const DotDiv = styled.div.attrs({
   border: 0.2rem solid black;
   border-radius: 50%;
   position: relative;
+  background-color: transparent;
 
   cursor: pointer;
 
@@ -53,7 +54,9 @@ const DotDiv = styled.div.attrs({
  * Use `Dot` to represent an individual point in some value on a character.
  */
 function Dot({ testId, ...props }) {
-  return <DotDiv data-testid={testId} {...props} />;
+  return (
+    <DotDiv data-testid={testId} aria-checked={props.checked} {...props} />
+  );
 }
 
 Dot.propTypes = {
