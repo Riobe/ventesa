@@ -6,7 +6,7 @@ import Dot from '../Dot';
 
 const DotGroupContainer = styled.div.attrs({
   className: 'DotGroup',
-  'data-testid': 'dot-group',
+  role: 'radiogroup',
 })`
   display: flex;
   width: min-content;

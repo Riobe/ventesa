@@ -10,17 +10,17 @@ describe('DotGroup', () => {
   });
 
   it('should have 5 dots by default.', () => {
-    const { getAllByTestId } = render(<DotGroup id="tested" />);
+    const { getAllByRole } = render(<DotGroup id="tested" />);
 
-    const dots = getAllByTestId('dot');
+    const dots = getAllByRole('radio');
 
     expect(dots.length).toBe(5);
   });
 
   it('should render an zero dot if told to.', () => {
-    const { getAllByTestId } = render(<DotGroup id="tested" zeroDot={true} />);
+    const { getAllByRole } = render(<DotGroup id="tested" zeroDot={true} />);
 
-    const dots = getAllByTestId('dot');
+    const dots = getAllByRole('radio');
 
     expect(dots.length).toBe(6);
   });

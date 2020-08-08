@@ -6,7 +6,12 @@ const defaultSize = '0.75rem';
 
 const DotDiv = styled.div.attrs({
   className: 'Dot',
-  'data-testid': 'dot'
+  // In practice a single dot would be a checkbox, but they're
+  // only really intended for use in a DotGroup, which will act as a
+  // radiogroup, and not on their own.
+  //
+  // See Also: https://www.w3.org/TR/wai-aria-1.1/#radio
+  role: 'radio',
 })`
   width: ${defaultSize};
   height: ${defaultSize};
@@ -47,8 +52,8 @@ const DotDiv = styled.div.attrs({
 /**
  * Use `Dot` to represent an individual point in some value on a character.
  */
-function Dot(props) {
-  return <DotDiv {...props} />;
+function Dot({ testId, ...props }) {
+  return <DotDiv data-testid={testId} {...props} />;
 }
 
 Dot.propTypes = {
