@@ -53,9 +53,9 @@ const DotDiv = styled.div.attrs({
 /**
  * Use `Dot` to represent an individual point in some value on a character.
  */
-function Dot({ testId, ...props }) {
+function Dot(props) {
   return (
-    <DotDiv data-testid={testId} aria-checked={props.checked} {...props} />
+    <DotDiv aria-checked={props.checked} {...props} />
   );
 }
 
