@@ -14,7 +14,8 @@ function roll(dice, { automaticSuccesses = 0, no10 = false } = {}) {
   }, 0);
 
   return {
-    rolls: rolls.join(','),
+    rolls: rolls,
+    rollsString: rolls.join(','),
     successes: rolledSuccesses + automaticSuccesses,
   };
 }
