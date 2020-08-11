@@ -3,7 +3,6 @@ import { ThemeProvider } from '@chakra-ui/core';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import theme from './theme';
-// import { CharacterProvider } from './lib/CharacterContext';
 
 import Layout from './components/Layout';
 

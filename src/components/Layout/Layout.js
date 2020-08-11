@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Switch, Route, Link, useParams } from 'react-router-dom';
 
 import NavButton from '../NavButton';
+import SecondEditionCombat from '../SecondEditionCombat';
 import VerticalDivider from '../VerticalDivider';
 
 const LayoutGrid = styled.div`
@@ -52,6 +53,7 @@ const RelatedInformation = styled.aside`
 
 const NarrativeRoute = () => <div>NarrativeRoute</div>;
 const CombatRoute = () => <div>CombatRoute</div>;
+const ReferenceRoute = () => <div>ReferenceRoute</div>;
 const CharacterRoute = () => {
   const { name } = useParams();
   return <div>CharacterRoute for: {name}</div>;
@@ -66,6 +68,12 @@ function Layout() {
         </NavButton>
         <NavButton as={Link} to="/battle">
           Battle
+        </NavButton>
+        <NavButton as={Link} to="/reference">
+          Reference
+        </NavButton>
+        <NavButton as={Link} to="/2e">
+          2E
         </NavButton>
         <VerticalDivider />
         <NavButton as={Link} to="/character/keldan">
@@ -87,6 +95,12 @@ function Layout() {
           </Route>
           <Route path="/character/:name">
             <CharacterRoute />
+          </Route>
+          <Route path="/reference">
+            <ReferenceRoute />
+          </Route>
+          <Route path="/2e">
+            <SecondEditionCombat />
           </Route>
           <Route path="*">
             <NarrativeRoute />
