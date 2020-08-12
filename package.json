@@ -5,7 +5,7 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "eslint --fix .",
+      "pre-commit": "npm run lint",
       "pre-push": "CI=true react-scripts test --env=jsdom"
     }
   },
@@ -18,7 +18,7 @@
     "@testing-library/user-event": "^7.2.1",
     "emotion-theming": "^10.0.27",
     "formik": "^2.1.4",
-    "immer": "^7.0.5",
+    "immer": "^7.0.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

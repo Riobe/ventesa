@@ -4,6 +4,10 @@ function roll(
   dice,
   { automaticSuccesses = 0, no10 = false, targetNum = 7 } = {},
 ) {
+  if (dice < 1 || dice === undefined || typeof dice !== 'number') {
+    throw new Error('Can only roll a positive number of dice.');
+  }
+
   const rolls = [...Array(dice)].map(d10).sort();
 
   const rolledSuccesses = rolls.reduce((result, next) => {

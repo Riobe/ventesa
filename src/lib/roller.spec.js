@@ -50,4 +50,28 @@ describe('roller', () => {
 
     expect(result.successes).toBe(2);
   });
+
+  it('should throw an error if called with no dice to roll.', async () => {
+    expect(() => {
+      roll();
+    }).toThrowError('Can only roll a positive number of dice.');
+  });
+
+  it('should throw an error if told to roll zero dice.', async () => {
+    expect(() => {
+      roll(0);
+    }).toThrowError('Can only roll a positive number of dice.');
+  });
+
+  it('should throw an error if told to roll negative dice.', async () => {
+    expect(() => {
+      roll(-5);
+    }).toThrowError('Can only roll a positive number of dice.');
+  });
+
+  it('should throw an error if to roll a non-number value of dice.', async () => {
+    expect(() => {
+      roll('EAT IT SUCKAS');
+    }).toThrowError('Can only roll a positive number of dice.');
+  });
 });
