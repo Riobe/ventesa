@@ -1,12 +1,13 @@
-function d10() {
-  return Math.floor(Math.random() * 11);
-}
+const d10 = require('./d10');
 
-function roll(dice, { automaticSuccesses = 0, no10 = false } = {}) {
+function roll(
+  dice,
+  { automaticSuccesses = 0, no10 = false, targetNum = 7 } = {},
+) {
   const rolls = [...Array(dice)].map(d10).sort();
 
   const rolledSuccesses = rolls.reduce((result, next) => {
-    if (next < 7) {
+    if (next < targetNum) {
       return result;
     }
 

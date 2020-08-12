@@ -1,37 +1,53 @@
-import { roll } from './roller';
+jest.mock('./d10');
 
-const { any, arrayContaining } = expect;
+const { roll } = require('./roller');
+const d10 = require('./d10');
+
+const { any } = expect;
 
 describe('roller', () => {
+  beforeEach(() => {
+    d10.mockClear();
+  });
+
   it('should roll a single dice if told to.', async () => {
+    d10.mockReturnValue(8);
+
     const result = roll(1);
 
     expect(result).toBeTruthy();
     expect(typeof result).toBe('object');
     expect(result).toMatchObject({
-      rolls: arrayContaining([any(Number)]),
+      rolls: [8],
       rollsString: any(String),
       successes: any(Number),
     });
   });
 
+  it('should return a success when rolling a custom target number.', async () => {
+    const targetNum = 5;
+    d10.mockReturnValue(5);
+
+    const result = roll(1, { targetNum });
+
+    expect(result.successes).toBe(1);
+  });
+
+  it('should not return a success when rolling under a custom target number.', async () => {
+    const targetNum = 5;
+    d10.mockReturnValue(3);
+
+    const result = roll(1, { targetNum });
+
+    expect(result.successes).toBe(0);
+  });
+
   it('should add automatic successes.', async () => {
     const testAutoSuccesses = 1;
+    d10.mockReturnValue(8);
 
     const result = roll(1, { automaticSuccesses: testAutoSuccesses });
 
-    expect(result.rolls).toHaveLength(1);
-
-    let rolledSuccesses = 0;
-    const rolled = result.rolls[0];
-    if (rolled > 6) {
-      if (rolled === 10) {
-        rolledSuccesses = 2;
-      } else {
-        rolledSuccesses = 1;
-      }
-    }
-
-    expect(result.successes).toBe(testAutoSuccesses + rolledSuccesses);
+    expect(result.successes).toBe(2);
   });
 });
