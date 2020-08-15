@@ -25,12 +25,31 @@ describe('roller', () => {
   });
 
   it('should return a success when rolling a custom target number.', async () => {
-    const targetNum = 5;
+    const targetNumber = 5;
     d10.mockReturnValue(5);
 
-    const result = roll(1, { targetNum });
+    const result = roll(1, { targetNumber });
 
     expect(result.successes).toBe(1);
+  });
+
+  it('should make 10s count as 1 success not 2.', async () => {
+    const noDoubleSuccesses = true;
+    d10.mockReturnValue(10);
+
+    const result = roll(1, { noDoubleSuccesses });
+
+    expect(result.successes).toBe(1);
+  });
+
+
+  it('should double dice successes when rolling a custom double dice number from that number forwards.', async () => {
+    const doubleSuccessNumber = 9;
+    d10.mockReturnValue(9, 10);
+
+    const result = roll(2, { doubleSuccessNumber });
+
+    expect(result.successes).toBe(4);
   });
 
   it('should not return a success when rolling under a custom target number.', async () => {

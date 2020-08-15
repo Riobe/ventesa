@@ -1,3 +1,3 @@
 module.exports = function d10() {
-  return Math.floor(Math.random() * 11);
+  return 1 + Math.floor(Math.random() * 10);
 };
