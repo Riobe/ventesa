@@ -18,9 +18,21 @@ describe('roller', () => {
     expect(result).toBeTruthy();
     expect(typeof result).toBe('object');
     expect(result).toMatchObject({
-      rolls: [8],
-      rollsString: any(String),
+      rolls: [{ roll: 8, rerolled: false }],
       successes: any(Number),
+    });
+  });
+
+  it('should reroll a dice if given a reroll value', async () => {
+    d10.mockReturnValueOnce(1);
+    d10.mockReturnValue(7);
+
+    const result = roll(1, { reroll: [1] });
+
+    expect(result.rolls).toHaveLength(2);
+    expect(result).toMatchObject({
+      rolls: [{ roll: 1, rerolled: true }, { roll: 7, rerolled: false }],
+      successes: 1,
     });
   });
 
@@ -41,7 +53,6 @@ describe('roller', () => {
 
     expect(result.successes).toBe(1);
   });
-
 
   it('should double dice successes when rolling a custom double dice number from that number forwards.', async () => {
     const doubleSuccessNumber = 9;
