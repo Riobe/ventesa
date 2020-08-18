@@ -6,36 +6,36 @@ function roll(
   dice,
   {
     automaticSuccesses = 0,
-    noDoubleSuccesses = false,
+    doubles = true,
     targetNumber = 7,
     doubleSuccessNumber = 10,
-    reroll = []
+    reroll = [],
   } = {},
 ) {
   if (dice < 1 || dice === undefined || typeof dice !== 'number') {
     throw new Error('Can only roll a positive number of dice.');
   }
 
-  // const rolls = [...Array(dice)].map(d10).sort(ascendingNumericalSort);
   const rolls = [];
+  let rolledSuccesses = 0;
   for (let i = 0; i < dice; i++) {
     let shouldReroll;
     do {
+      // Roll and determine reroll
       const roll = d10();
-      shouldReroll = reroll.includes(roll);
-      rolls.push({ roll, rerolled: shouldReroll });
+      shouldReroll = !!reroll.length && reroll.includes(roll);
+
+      // Count successes
+      let successes = roll >= targetNumber ? 1 : 0;
+      if (doubles && roll >= doubleSuccessNumber) {
+        successes *= 2;
+      }
+      rolledSuccesses += successes;
+
+      rolls.push({ roll, rerolled: shouldReroll, successes });
     } while (shouldReroll);
-   
   }
   rolls.sort(ascendingNumericalSort);
-
-  const rolledSuccesses = rolls.reduce((result, { roll, rerolled }) => {
-    if (roll < targetNumber || rerolled) {
-      return result;
-    }
-
-    return result + (roll >= doubleSuccessNumber && !noDoubleSuccesses ? 2 : 1);
-  }, 0);
 
   return {
     rolls,

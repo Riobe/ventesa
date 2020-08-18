@@ -31,7 +31,10 @@ describe('roller', () => {
 
     expect(result.rolls).toHaveLength(2);
     expect(result).toMatchObject({
-      rolls: [{ roll: 1, rerolled: true }, { roll: 7, rerolled: false }],
+      rolls: [
+        { roll: 1, rerolled: true },
+        { roll: 7, rerolled: false },
+      ],
       successes: 1,
     });
   });
@@ -46,10 +49,9 @@ describe('roller', () => {
   });
 
   it('should make 10s count as 1 success not 2.', async () => {
-    const noDoubleSuccesses = true;
     d10.mockReturnValue(10);
 
-    const result = roll(1, { noDoubleSuccesses });
+    const result = roll(1, { doubles: false });
 
     expect(result.successes).toBe(1);
   });
