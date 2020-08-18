@@ -9,6 +9,7 @@ import VerticalDivider from '../VerticalDivider';
 const LayoutGrid = styled.div`
   margin: 0 auto;
   display: grid;
+  background-color: #262626;
 
   min-width: 768px;
   max-width: 1024px;
