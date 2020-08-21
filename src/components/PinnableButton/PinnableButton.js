@@ -89,7 +89,7 @@ const PinnableButtonRight = styled.button.attrs({
     ${bgColor('button')} 50%
   );
 
-  transition: background-position 2s;
+  transition: background-position 0.2s;
 
   &:focus {
     outline: 0;
@@ -134,6 +134,7 @@ const CloseButton = styled.button.attrs({
 
   .pinned > & {
     background-color: ${accent('primary')};
+    background-image: none;
   }
 
   background-size: 200% 100%;
@@ -143,7 +144,7 @@ const CloseButton = styled.button.attrs({
     ${bgColor('button')} 50%
   );
 
-  transition: background-position 2s;
+  transition: background-position 0.2s;
 
   .PinnableButton:hover > & {
     background-position: -100% 0;
