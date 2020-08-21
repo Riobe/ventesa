@@ -8,9 +8,6 @@ const bgColor = color => ({ theme }) => theme.colors.background[color];
 const accent = color => ({ theme }) => theme.colors.accent[color];
 const text = color => ({ theme }) => theme.colors.text[color];
 
-const pinnedBorderThickness = '0.11rem';
-const cancelX = '\u{1F5D9}';
-
 const PinnableButtonContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -64,7 +61,7 @@ const PinnableButtonLeft = styled.button.attrs({
 `;
 
 const PinnableButtonRight = styled.button.attrs({
-  className: 'PinnableButtonChararacter',
+  className: 'PinnableButtonRoute',
 })`
   height: 1.5rem;
   width: 0.75rem;
@@ -111,7 +108,9 @@ const PinnableButtonRight = styled.button.attrs({
   }
 `;
 
-const CloseButton = styled.button`
+const CloseButton = styled.button.attrs({
+  className: 'PinnableButtonClose',
+})`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -195,9 +194,6 @@ function PinnableButton({
       className={'PinnableButton ' + finalClassName}
       {...props}
     >
-      <CloseButton theme={theme}>
-        <Icon name="cancel" color="white" size="0.2rem" />
-      </CloseButton>
       <PinnableButtonLeft theme={theme} onClick={() => onPinToggle(!pinned)}>
         <Icon name="pin" color="white" size="0.6rem" />
       </PinnableButtonLeft>
@@ -205,6 +201,10 @@ function PinnableButton({
       <PinnableButtonRight theme={theme} onClick={() => onRouteClicked()}>
         {children}
       </PinnableButtonRight>
+
+      <CloseButton theme={theme}>
+        <Icon name="cancel" color="white" size="0.2rem" />
+      </CloseButton>
     </PinnableButtonContainer>
   );
 }
