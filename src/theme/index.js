@@ -1,1 +1,1 @@
-export { default, colors } from './theme';
+export { default, colors, breakpoints, icons } from './theme';

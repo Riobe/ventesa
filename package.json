@@ -45,7 +45,7 @@
     "lint-staged": "^10.2.11"
   },
   "scripts": {
-    "start": "concurrently -n js,css,node \"npm run react\" \"npm run electron\"",
+    "start": "concurrently -n js,css,node \"npm run react\" \"npm run electron\" \"npm run storybook\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

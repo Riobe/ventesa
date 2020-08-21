@@ -1,15 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTheme } from '@chakra-ui/core';
 import { Switch, Route, Link, useParams } from 'react-router-dom';
 
 import NavButton from '../NavButton';
 import SecondEditionCombat from '../SecondEditionCombat';
 import VerticalDivider from '../VerticalDivider';
 
+const Background = styled.div`
+  background-color: ${({ theme }) => theme.colors.background.primary};
+`;
+
 const LayoutGrid = styled.div`
+  height: 100%;
   margin: 0 auto;
   display: grid;
-  background-color: #262626;
 
   min-width: 768px;
   max-width: 1024px;
@@ -61,55 +66,59 @@ const CharacterRoute = () => {
 };
 
 function Layout() {
+  const theme = useTheme();
+
   return (
-    <LayoutGrid id="Layout">
-      <MainNav>
-        <NavButton as={Link} to="/narrative">
-          Narrative
-        </NavButton>
-        <NavButton as={Link} to="/battle">
-          Battle
-        </NavButton>
-        <NavButton as={Link} to="/reference">
-          Reference
-        </NavButton>
-        <NavButton as={Link} to="/2e">
-          2E
-        </NavButton>
-        <VerticalDivider />
-        <NavButton as={Link} to="/character/keldan">
-          Keldan
-        </NavButton>
-        <NavButton as={Link} to="/character/kallista">
-          Kallista
-        </NavButton>
-      </MainNav>
-      <SubNav>
-        <NavButton>Search</NavButton>
-        <NavButton>Players 0.</NavButton>
-        <NavButton>Quick Characters 0.</NavButton>
-      </SubNav>
-      <MainContent>
-        <Switch>
-          <Route path="/battle">
-            <CombatRoute />
-          </Route>
-          <Route path="/character/:name">
-            <CharacterRoute />
-          </Route>
-          <Route path="/reference">
-            <ReferenceRoute />
-          </Route>
-          <Route path="/2e">
-            <SecondEditionCombat />
-          </Route>
-          <Route path="*">
-            <NarrativeRoute />
-          </Route>
-        </Switch>
-      </MainContent>
-      <RelatedInformation>Related Information</RelatedInformation>
-    </LayoutGrid>
+    <Background id="Layout" theme={theme}>
+      <LayoutGrid>
+        <MainNav>
+          <NavButton as={Link} to="/narrative">
+            Narrative
+          </NavButton>
+          <NavButton as={Link} to="/battle">
+            Battle
+          </NavButton>
+          <NavButton as={Link} to="/reference">
+            Reference
+          </NavButton>
+          <NavButton as={Link} to="/2e">
+            2E
+          </NavButton>
+          <VerticalDivider />
+          <NavButton as={Link} to="/character/keldan">
+            Keldan
+          </NavButton>
+          <NavButton as={Link} to="/character/kallista">
+            Kallista
+          </NavButton>
+        </MainNav>
+        <SubNav>
+          <NavButton>Search</NavButton>
+          <NavButton>Players 0.</NavButton>
+          <NavButton>Quick Characters 0.</NavButton>
+        </SubNav>
+        <MainContent>
+          <Switch>
+            <Route path="/battle">
+              <CombatRoute />
+            </Route>
+            <Route path="/character/:name">
+              <CharacterRoute />
+            </Route>
+            <Route path="/reference">
+              <ReferenceRoute />
+            </Route>
+            <Route path="/2e">
+              <SecondEditionCombat />
+            </Route>
+            <Route path="*">
+              <NarrativeRoute />
+            </Route>
+          </Switch>
+        </MainContent>
+        <RelatedInformation>Related Information</RelatedInformation>
+      </LayoutGrid>
+    </Background>
   );
 }
 

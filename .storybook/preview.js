@@ -10,8 +10,7 @@ import customTheme from '../src/theme';
 import exaltedBackgroundMap from '../src/images/exalted-bg-map.jpg';
 
 const CanvasElement = styled.main`
-  background-color: ${({ theme }) => theme.colors.backgroundPrimary};
-  background: url(${exaltedBackgroundMap});
+  background-color: ${({ theme }) => theme.colors.background.primary};
   padding: 10px;
 `;
 

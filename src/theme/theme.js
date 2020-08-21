@@ -1,6 +1,6 @@
 import { theme } from '@chakra-ui/core';
 
-import icons from './icons';
+import * as customIcons from './icons';
 
 const customTheme = {
   ...theme,
@@ -11,17 +11,26 @@ const customTheme = {
   ],
   colors: {
     ...theme.colors,
-    backgroundPrimary: '#666',
-    backgroundDark: '#333',
-    textLight: '#EEE',
+    background: {
+      primary: '#262626',
+      panel: '#333333',
+      nav: '#404040',
+      button: '#666666',
+    },
+    text: {
+      normal: 'white',
+    },
     solarGold: 'rgb(249, 180, 37)',
+    accent: {
+      primary: '#33CC7B',
+    },
   },
   icons: {
     ...theme.icons,
-    ...icons,
+    ...customIcons,
   },
 };
 
-export const { colors } = customTheme;
+export const { colors, breakpoints, icons } = customTheme;
 
 export default customTheme;
