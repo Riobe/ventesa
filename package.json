@@ -22,9 +22,10 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^3.4.3",
     "react-spring": "^8.0.27",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.0.0-rc.29",
@@ -48,7 +49,6 @@
     "start": "concurrently -n js,css,node \"npm run react\" \"npm run electron\" \"npm run storybook\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "react": "react-scripts start",
     "electron": "electron .",
     "storybook": "start-storybook -p 9009 -s public",
@@ -56,7 +56,10 @@
     "lint": "eslint --fix ."
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -28,7 +28,7 @@ const ToggleHeader = styled.h1`
 export const Example = () => (
   <DotGroup
     value={number('Dots', 2, { range: true, min: 0, max: 5, step: 1 })}
-    includeZero={boolean('Include Zero?', false)}
+    zeroDot={boolean('Include Zero?', false)}
     maxDots={number('Max Dots', 5, { range: true, min: 1, max: 5, step: 1 })}
     onValueChange={action('onValueChange')}
   />
@@ -43,7 +43,7 @@ export const Attribute = () => {
       <ToggleHeader>Strength</ToggleHeader>
       <DotGroup
         value={value}
-        includeZero={false}
+        zeroDot={false}
         onValueChange={value => {
           setValue(value);
           onValueChange(value);
@@ -62,7 +62,7 @@ export const Ability = () => {
       <ToggleHeader>Ride</ToggleHeader>
       <DotGroup
         value={value}
-        includeZero={true}
+        zeroDot={true}
         onValueChange={value => {
           setValue(value);
           onValueChange(value);
@@ -81,7 +81,7 @@ export const Merit = () => {
       <ToggleHeader>Familiar</ToggleHeader>
       <DotGroup
         value={value}
-        includeZero={false}
+        zeroDot={false}
         maxDots={3}
         onValueChange={value => {
           setValue(value);

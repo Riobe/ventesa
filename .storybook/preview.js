@@ -7,10 +7,10 @@ import { addDecorator, addParameters, configure } from '@storybook/react';
 import { themes } from '@storybook/theming';
 
 import customTheme from '../src/theme';
-import exaltedBackgroundMap from '../src/images/exalted-bg-map.jpg';
+import { bgColor } from '../src/theme/helpers';
 
 const CanvasElement = styled.main`
-  background-color: ${({ theme }) => theme.colors.background.primary};
+  background-color: ${bgColor('primary')};
   padding: 10px;
 `;
 

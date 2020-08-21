@@ -4,9 +4,7 @@ import { Icon } from '@chakra-ui/core';
 import styled from 'styled-components';
 import { useTheme } from '@chakra-ui/core';
 
-const bgColor = color => ({ theme }) => theme.colors.background[color];
-const accent = color => ({ theme }) => theme.colors.accent[color];
-const text = color => ({ theme }) => theme.colors.text[color];
+import { bgColor, accent, text } from '../../theme/helpers';
 
 const PinnableButtonContainer = styled.div`
   display: flex;

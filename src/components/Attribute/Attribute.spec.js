@@ -1,12 +1,18 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import { ThemeProvider } from '@chakra-ui/core';
+
 import Attribute from './Attribute';
+
+import theme from '../../theme';
 
 describe('Attribute', () => {
   it('should render successfully.', async () => {
     const testAttribute = 'testing';
     const { getByLabelText, getByText } = render(
-      <Attribute name={testAttribute} />,
+      <ThemeProvider theme={theme}>
+        <Attribute name={testAttribute} />
+      </ThemeProvider>,
     );
 
     const label = getByText(testAttribute);
@@ -19,7 +25,11 @@ describe('Attribute', () => {
 
   it('should bold the header.', async () => {
     const testAttribute = 'testing';
-    const { getByText } = render(<Attribute name={testAttribute} />);
+    const { getByText } = render(
+      <ThemeProvider theme={theme}>
+        <Attribute name={testAttribute} />
+      </ThemeProvider>,
+    );
 
     const label = getByText(testAttribute);
     expect(label).toBeInTheDocument();
@@ -33,7 +43,9 @@ describe('Attribute', () => {
     const onValueChange = jest.fn();
 
     const { getAllByRole } = render(
-      <Attribute name={testAttribute} onValueChange={onValueChange} />,
+      <ThemeProvider theme={theme}>
+        <Attribute name={testAttribute} onValueChange={onValueChange} />
+      </ThemeProvider>,
     );
 
     const dots = getAllByRole('radio');
@@ -49,11 +61,13 @@ describe('Attribute', () => {
     const onValueChange = jest.fn();
 
     const { getAllByRole } = render(
-      <Attribute
-        name={testAttribute}
-        value={testValue}
-        onValueChange={onValueChange}
-      />,
+      <ThemeProvider theme={theme}>
+        <Attribute
+          name={testAttribute}
+          value={testValue}
+          onValueChange={onValueChange}
+        />
+      </ThemeProvider>,
     );
 
     const dots = getAllByRole('radio');

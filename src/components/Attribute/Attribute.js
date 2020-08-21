@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTheme } from '@chakra-ui/core';
 
 import DotGroup from '../DotGroup';
+
+import { text } from '../../theme/helpers';
 
 const AttributeRow = styled.div.attrs({
   className: 'AttributeRow',
@@ -15,6 +18,7 @@ const AttributeLabel = styled.label.attrs({
   className: 'AttributeLabel',
 })`
   font-weight: 800;
+  color: ${text('normal')};
 `;
 
 /**
@@ -24,10 +28,14 @@ const AttributeLabel = styled.label.attrs({
  * all of the horizontal space it can.
  */
 function Attribute({ name, value, onValueChange }) {
+  const theme = useTheme();
   const attributeId = `attribute-${name}`;
+
   return (
     <AttributeRow>
-      <AttributeLabel id={attributeId}>{name}</AttributeLabel>
+      <AttributeLabel id={attributeId} theme={theme}>
+        {name}
+      </AttributeLabel>
       <DotGroup
         aria-labelledby={attributeId}
         value={value}
