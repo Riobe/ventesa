@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { ThemeProvider, useTheme } from '@chakra-ui/core';
 
-import { withKnobs } from '@storybook/addon-knobs';
-import { addDecorator, addParameters, configure } from '@storybook/react';
 import { themes } from '@storybook/theming';
 
 import customTheme from '../src/theme';
@@ -24,13 +22,21 @@ function Canvas({ children }) {
   );
 }
 
-addDecorator(story => (
-  <ThemeProvider theme={customTheme}>
-    <Canvas>{story()}</Canvas>
-  </ThemeProvider>
-));
+export const decorators = [
+  Story => {
+    debugger;
 
-addParameters({
+    return (
+      <ThemeProvider theme={customTheme}>
+        <Canvas>
+          <Story />
+        </Canvas>
+      </ThemeProvider>
+    );
+  },
+];
+
+export const parameters = {
   docs: {
     theme: themes.dark,
   },
@@ -52,4 +58,4 @@ addParameters({
       locales: 'en-US',
     },
   },
-});
+};
