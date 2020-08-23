@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ThemeProvider, useTheme } from '@chakra-ui/core';
 
 import { themes } from '@storybook/theming';
+import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
 
 import customTheme from '../src/theme';
 import { bgColor } from '../src/theme/helpers';
@@ -24,8 +25,6 @@ function Canvas({ children }) {
 
 export const decorators = [
   Story => {
-    debugger;
-
     return (
       <ThemeProvider theme={customTheme}>
         <Canvas>
@@ -36,9 +35,19 @@ export const decorators = [
   },
 ];
 
+function CustomDocsContainer({ context, children }) {
+  return (
+    <DocsContainer context={context}>
+      <ThemeProvider theme={customTheme}>{children}</ThemeProvider>
+    </DocsContainer>
+  );
+}
+
 export const parameters = {
   docs: {
     theme: themes.dark,
+    container: CustomDocsContainer,
+    page: DocsPage,
   },
   options: {
     storySort: {
