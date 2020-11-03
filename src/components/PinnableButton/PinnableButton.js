@@ -150,10 +150,11 @@ const CloseButton = styled.button.attrs({
     ${bgColor('button')} 50%
   );
 
-  transition: background-position 0.2s;
+  transition: background-position 0.08s;
 
   .PinnableButton:hover > & {
     background-position: -100% 0;
+    transition: background-position 0.12s 0.08s;
   }
 `;
 
