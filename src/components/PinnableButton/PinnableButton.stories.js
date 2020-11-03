@@ -18,6 +18,7 @@ export const Example = () => (
   <Panel style={{ padding: '10px' }}>
     <PinnableButton
       pinned={boolean('Pinned?', false)}
+      active={boolean('Active?', false)}
       onPinToggle={action('onPinToggle')}
       onRouteClicked={action('onRouteClicked')}
     >

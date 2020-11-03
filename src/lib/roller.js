@@ -27,6 +27,7 @@ function roll(
 
       // Count successes
       let successes = roll >= targetNumber ? 1 : 0;
+
       if (doubles && roll >= doubleSuccessNumber) {
         successes *= 2;
       }

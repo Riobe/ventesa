@@ -104,6 +104,12 @@ const PinnableButtonRight = styled.button.attrs({
       0.03rem 0.12rem 0 0 ${accent('primary')},
       0.07rem 0 0 0.07rem ${accent('primary')};
   }
+
+  .active > & {
+    color: ${accent('primary')};
+    text-decoration: underline;
+    font-weight: bold;
+  }
 `;
 
 const CloseButton = styled.button.attrs({
@@ -179,6 +185,7 @@ const CloseButton = styled.button.attrs({
  */
 function PinnableButton({
   pinned,
+  active,
   className,
   children,
   onPinToggle,
@@ -187,13 +194,19 @@ function PinnableButton({
 }) {
   const theme = useTheme();
 
-  const finalClassName = (className || '') + (pinned ? ' pinned' : '');
+  const classes = ['PinnableButton'];
+  if (className) {
+    classes.push(className);
+  }
+  if (pinned) {
+    classes.push('pinned');
+  }
+  if (active) {
+    classes.push('active');
+  }
 
   return (
-    <PinnableButtonContainer
-      className={'PinnableButton ' + finalClassName}
-      {...props}
-    >
+    <PinnableButtonContainer className={classes.join(' ')} {...props}>
       <PinnableButtonLeft theme={theme} onClick={() => onPinToggle(!pinned)}>
         <Icon name="pin" color="white" size="0.6rem" />
       </PinnableButtonLeft>
@@ -203,7 +216,7 @@ function PinnableButton({
       </PinnableButtonRight>
 
       <CloseButton theme={theme}>
-        <Icon name="cancel" color="white" size="0.2rem" />
+        <Icon name="cancel" color="white" size="0.35rem" />
       </CloseButton>
     </PinnableButtonContainer>
   );
@@ -213,12 +226,14 @@ PinnableButton.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   pinned: PropTypes.bool,
+  active: PropTypes.bool,
   onPinToggle: PropTypes.func.isRequired,
   onRouteClicked: PropTypes.func.isRequired,
 };
 
 PinnableButton.defaultProps = {
   pinned: false,
+  active: false,
 };
 
 export default PinnableButton;
