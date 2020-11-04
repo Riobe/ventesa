@@ -88,11 +88,11 @@ function Layout() {
           <Icon name="home" color="white" size={ICON_SIZE} />
           <Icon name="book" color="white" size={ICON_SIZE} />
           <Icon name="shield" color="white" size={ICON_SIZE} />
-          <Icon name="shield" color="white" size={ICON_SIZE} />
-          <Icon name="shield" color="white" size={ICON_SIZE} />
+          <Icon name="players" color="white" size={ICON_SIZE} />
+          <Icon name="npcs" color="white" size={ICON_SIZE} />
         </NavButtons>
         <NavSettings>
-          <Icon name="shield" color="white" size={ICON_SIZE} />
+          <Icon name="settings" color="white" size={ICON_SIZE} />
         </NavSettings>
       </Nav>
       <Content theme={theme}>Content</Content>
