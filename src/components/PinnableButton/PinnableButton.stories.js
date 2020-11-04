@@ -21,6 +21,7 @@ export const Example = () => (
       active={boolean('Active?', false)}
       onPinToggle={action('onPinToggle')}
       onRouteClicked={action('onRouteClicked')}
+      onClose={action('onClose')}
     >
       Boar-Tusk Crocodile
     </PinnableButton>
@@ -33,6 +34,7 @@ export const Pinned = () => (
       pinned={true}
       onPinToggle={action('onPinToggle')}
       onRouteClicked={action('onRouteClicked')}
+      onClose={action('onClose')}
     >
       Boar-Tusk Crocodile
     </PinnableButton>
@@ -48,6 +50,7 @@ export const Controlled = () => {
         pinned={pinned}
         onPinToggle={newPinned => setPinned(newPinned)}
         onRouteClicked={action('onRouteClicked')}
+        onClose={action('onClose')}
       >
         Boar-Tusk Crocodile
       </PinnableButton>

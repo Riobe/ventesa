@@ -190,6 +190,7 @@ function PinnableButton({
   children,
   onPinToggle,
   onRouteClicked,
+  onClose,
   ...props
 }) {
   const theme = useTheme();
@@ -215,7 +216,7 @@ function PinnableButton({
         {children}
       </PinnableButtonRight>
 
-      <CloseButton theme={theme}>
+      <CloseButton theme={theme} onClick={onClose}>
         <Icon name="cancel" color="white" size="0.35rem" />
       </CloseButton>
     </PinnableButtonContainer>
@@ -229,6 +230,7 @@ PinnableButton.propTypes = {
   active: PropTypes.bool,
   onPinToggle: PropTypes.func.isRequired,
   onRouteClicked: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 PinnableButton.defaultProps = {

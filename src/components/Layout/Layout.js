@@ -1,12 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useTheme } from '@chakra-ui/core';
-import { Switch, Route, Link, useParams } from 'react-router-dom';
+import { Icon, useTheme } from '@chakra-ui/core';
 
-import NavButton from '../NavButton';
-import SecondEditionCombat from '../SecondEditionCombat';
-import VerticalDivider from '../VerticalDivider';
-import { bgColor, breakpoint, BREAKPOINT_SM } from '../../theme';
+import { accent, bgColor, breakpoint, BREAKPOINT_SM } from '../../theme';
 
 const LayoutGrid = styled.div`
   height: 100%;
@@ -17,96 +13,90 @@ const LayoutGrid = styled.div`
   min-width: ${breakpoint(BREAKPOINT_SM)};
 
   grid:
-    1rem auto /
-    100px auto 18.75rem;
+    4rem auto /
+    55px auto 18.75rem;
   grid-template-areas:
     'title  title   title'
     'nav    content chat';
 `;
 
-const MainNav = styled.header`
-  grid-area: main-nav;
+const Title = styled.header`
+  grid-area: title;
 
-  height: 2rem;
+  color: white;
 
-  display: grid;
-  grid: min-content / auto-flow min-content;
-  gap: 0px 1rem;
-  margin-bottom: 0.5rem;
+  background-color: ${bgColor('title')};
+
+  & > h1 {
+    font-size: 1.5rem;
+  }
 `;
 
-const SubNav = styled.header`
-  grid-area: sub-nav;
+const Nav = styled.section`
+  grid-area: nav;
   display: flex;
+  flex-direction: column;
+  padding: 0.75rem 0;
+
+  color: white;
+
+  background-color: ${bgColor('nav')};
+
+  svg:hover {
+    color: ${accent('primary')};
+  }
 `;
 
-const MainContent = styled.main`
-  grid-area: main;
+const NavButtons = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-basis: min-content;
+  gap: 1.5rem;
 `;
 
-const RelatedInformation = styled.aside`
-  grid-area: related;
+const NavSettings = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
 `;
 
-const NarrativeRoute = () => <div>NarrativeRoute</div>;
-const CombatRoute = () => <div>CombatRoute</div>;
-const ReferenceRoute = () => <div>ReferenceRoute</div>;
-const CharacterRoute = () => {
-  const { name } = useParams();
-  return <div>CharacterRoute for: {name}</div>;
-};
+const Content = styled.section`
+  grid-area: content;
+
+  border-right: 5px solid ${accent('primary')};
+`;
+
+const Chat = styled.section`
+  grid-area: chat;
+`;
+
+const ICON_SIZE = '2.25rem';
 
 function Layout() {
   const theme = useTheme();
 
   return (
     <LayoutGrid id="Layout" theme={theme}>
-      <MainNav>
-        <NavButton as={Link} to="/narrative">
-          Narrative
-        </NavButton>
-        <NavButton as={Link} to="/battle">
-          Battle
-        </NavButton>
-        <NavButton as={Link} to="/reference">
-          Reference
-        </NavButton>
-        <NavButton as={Link} to="/2e">
-          2E
-        </NavButton>
-        <VerticalDivider />
-        <NavButton as={Link} to="/character/keldan">
-          Keldan
-        </NavButton>
-        <NavButton as={Link} to="/character/kallista">
-          Kallista
-        </NavButton>
-      </MainNav>
-      <SubNav>
-        <NavButton>Search</NavButton>
-        <NavButton>Players 0.</NavButton>
-        <NavButton>Quick Characters 0.</NavButton>
-      </SubNav>
-      <MainContent>
-        <Switch>
-          <Route path="/battle">
-            <CombatRoute />
-          </Route>
-          <Route path="/character/:name">
-            <CharacterRoute />
-          </Route>
-          <Route path="/reference">
-            <ReferenceRoute />
-          </Route>
-          <Route path="/2e">
-            <SecondEditionCombat />
-          </Route>
-          <Route path="*">
-            <NarrativeRoute />
-          </Route>
-        </Switch>
-      </MainContent>
-      <RelatedInformation>Related Information</RelatedInformation>
+      <Title theme={theme}>
+        <h1>Exalted VTT</h1>
+      </Title>
+      <Nav theme={theme}>
+        <NavButtons>
+          <Icon name="home" color="white" size={ICON_SIZE} />
+          <Icon name="book" color="white" size={ICON_SIZE} />
+          <Icon name="shield" color="white" size={ICON_SIZE} />
+          <Icon name="shield" color="white" size={ICON_SIZE} />
+          <Icon name="shield" color="white" size={ICON_SIZE} />
+        </NavButtons>
+        <NavSettings>
+          <Icon name="shield" color="white" size={ICON_SIZE} />
+        </NavSettings>
+      </Nav>
+      <Content theme={theme}>Content</Content>
+      <Chat>Chat</Chat>
     </LayoutGrid>
   );
 }

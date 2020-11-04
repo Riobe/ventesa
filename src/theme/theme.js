@@ -14,8 +14,8 @@ const customTheme = {
     ...theme.colors,
     background: {
       primary: '#262626',
-      panel: '#333333',
-      sidebar: '#1A1A1A',
+      title: '#333333',
+      nav: '#1A1A1A',
     },
     border: {
       chat: '#808080',
