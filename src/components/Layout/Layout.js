@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Icon, useTheme } from '@chakra-ui/core';
 
 import { accent, bgColor, breakpoint, BREAKPOINT_SM } from '../../theme';
+import Sidebar from '../Sidebar';
 
 const LayoutGrid = styled.div`
   height: 100%;
@@ -32,37 +33,6 @@ const Title = styled.header`
   }
 `;
 
-const Nav = styled.section`
-  grid-area: nav;
-  display: flex;
-  flex-direction: column;
-  padding: 0.75rem 0;
-
-  color: white;
-
-  background-color: ${bgColor('nav')};
-
-  svg:hover {
-    color: ${accent('primary')};
-  }
-`;
-
-const NavButtons = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex-basis: min-content;
-  gap: 1.5rem;
-`;
-
-const NavSettings = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: flex-end;
-  align-items: center;
-`;
-
 const Content = styled.section`
   grid-area: content;
 
@@ -73,8 +43,6 @@ const Chat = styled.section`
   grid-area: chat;
 `;
 
-const ICON_SIZE = '2.25rem';
-
 function Layout() {
   const theme = useTheme();
 
@@ -83,19 +51,8 @@ function Layout() {
       <Title theme={theme}>
         <h1>Exalted VTT</h1>
       </Title>
-      <Nav theme={theme}>
-        <NavButtons>
-          <Icon name="home" color="white" size={ICON_SIZE} />
-          <Icon name="book" color="white" size={ICON_SIZE} />
-          <Icon name="shield" color="white" size={ICON_SIZE} />
-          <Icon name="shield" color="white" size={ICON_SIZE} />
-          <Icon name="shield" color="white" size={ICON_SIZE} />
-        </NavButtons>
-        <NavSettings>
-          <Icon name="shield" color="white" size={ICON_SIZE} />
-        </NavSettings>
-      </Nav>
       <Content theme={theme}>Content</Content>
+      <Sidebar />
       <Chat>Chat</Chat>
     </LayoutGrid>
   );
