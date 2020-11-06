@@ -68,37 +68,6 @@ const ExpandArrow = styled.div`
   z-index: 10;
 `;
 
-const ExpandableNav2 = styled.div`
-  height: 100%;
-  overflow: hidden;
-  max-width: 0;
-  width: 16rem;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding-top: 28px;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  background-color: ${bgColor('nav')};
-
-  z-index: 20;
-
-  transition: max-width 0.3s, right 0.3s;
-
-  .Sidebar:hover > & {
-    max-width: 16rem;
-    right: -16rem;
-  }
-
-  & > div {
-    padding-bottom: 43px;
-    padding-left: 18px;
-    font-weight: bold;
-  }
-`;
-
 const ExpandableNav = styled.div`
   height: 100%;
   overflow: hidden;
