@@ -1,8 +1,11 @@
 export { default as book } from './book';
 export { default as cancel } from './cancel';
+export { default as charms } from './charms';
 export { default as fist } from './fist';
 export { default as home } from './home';
+export { default as npcs } from './npcs';
 export { default as pin } from './pin';
+export { default as players } from './players';
 export { default as running } from './running';
 export { default as shield } from './shield';
 export { default as sponge } from './sponge';
