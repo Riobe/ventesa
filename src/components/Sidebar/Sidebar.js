@@ -25,7 +25,6 @@ const NavButtons = styled.div`
   flex-direction: column;
 
   & .nav-link {
-    align-self: end;
     justify-self: start;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -37,11 +36,14 @@ const NavButtons = styled.div`
 
 const NavWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 55px auto;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   margin-bottom: 30px;
+
+  justify-items: center;
+  align-items: center;
 
   &:hover {
     color: ${accent('primary')};
