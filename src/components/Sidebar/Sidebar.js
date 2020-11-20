@@ -17,29 +17,36 @@ const Nav = styled.section`
 
   svg:hover {
     color: ${accent('primary')};
-
-    cursor: pointer;
-  }
-  svg + .nav-link:hover {
-    color: ${accent('primary')};
   }
 `;
 
 const NavButtons = styled.div`
-  display: grid;
-  grid: auto-flow 2.25rem / 55px auto;
-  gap: 30px 0;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
 
   & .nav-link {
-    align-self: end;
     justify-self: start;
     text-overflow: ellipsis;
     white-space: nowrap;
-
     font-weight: bold;
-
     padding-left: 12px;
+    cursor: pointer;
+  }
+`;
+
+const NavWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 55px auto;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  margin-bottom: 30px;
+
+  justify-items: center;
+  align-items: center;
+
+  &:hover {
+    color: ${accent('primary')};
 
     cursor: pointer;
   }
@@ -94,6 +101,33 @@ const ExpandableNav = styled.div`
 `;
 const ICON_SIZE = '36px';
 
+const buttons = [
+  {
+    icon: 'home',
+    text: 'Home',
+  },
+  {
+    icon: 'book',
+    text: 'Narrative Mode',
+  },
+  {
+    icon: 'shield',
+    text: 'Combat Mode',
+  },
+  {
+    icon: 'npcs',
+    text: 'NPCS',
+  },
+  {
+    icon: 'charms',
+    text: 'Charms',
+  },
+  {
+    icon: 'players',
+    text: 'Players',
+  },
+];
+
 function Sidebar() {
   const theme = useTheme();
 
@@ -102,23 +136,12 @@ function Sidebar() {
       <ExpandArrow theme={theme} />
       <ExpandableNav theme={theme}>
         <NavButtons>
-          <Icon name="home" color="white" size={ICON_SIZE} />
-          <div className="nav-link">Home</div>
-
-          <Icon name="book" color="white" size={ICON_SIZE} />
-          <div className="nav-link">Narrative Mode</div>
-
-          <Icon name="shield" color="white" size={ICON_SIZE} />
-          <div className="nav-link">Combat Mode</div>
-
-          <Icon name="npcs" color="white" size={ICON_SIZE} />
-          <div className="nav-link">NPCS</div>
-
-          <Icon name="charms" color="white" size={ICON_SIZE} />
-          <div className="nav-link">Charms</div>
-
-          <Icon name="players" color="white" size={ICON_SIZE} />
-          <div className="nav-link">Players</div>
+          {buttons.map(button => (
+            <NavWrapper theme={theme} key={button.id}>
+              <Icon name={button.icon} size={ICON_SIZE} />
+              <div className="nav-link">{button.text}</div>
+            </NavWrapper>
+          ))}
         </NavButtons>
 
         <NavSettings>
