@@ -11,13 +11,13 @@ When adding a new component, you'll be creating a new directory in `<project-dir
 1) First add the directory `<project-directory>/src/components/Banshee/`.  
 2) Next add an `index.js` to the directory: `<project-directory>/src/components/Banshee/index.js` with the following:
 
-```
+```javascript
 export { default } from './Banshee';
 ```
 
 3) Next create `Banshee.js`, the file where the actual component will go.
 
-```
+```javascript
 import React from 'react';
 
 /**
@@ -34,7 +34,7 @@ NOTE: Please keep the comment before the function and fill it out. Not only does
 
 4) You can now pull in your new component by importing the folder!
 
-```
+```javascript
 import Banshee from '../Banshee';
 ```
 
@@ -46,13 +46,13 @@ We're currently styling our components using the fantastic [styled-components](h
 
 First, import styled-components to the top of your file:
 
-```
+```javascript
 import styled from 'styled-components';
 ```
 
 Then, you can create HTML elements with it:
 
-```
+```javascript
 const BansheeSection = styled.section`
   display: flex;
   /* Other CSS */
@@ -61,7 +61,7 @@ const BansheeSection = styled.section`
 
 You can use these like any react components!
 
-```
+```javascript
 /**
  * My Banshee component.
  */
@@ -74,7 +74,7 @@ function Banshee() {
 
 To include values from the theme in your CSS pull in the helpers from the theme folder. Here's an example:
 
-```
+```javascript
 import { bgColor } from '../../theme';
 ```
 
@@ -82,13 +82,13 @@ Other helpers can be found at `<project-directory>/src/theme/helpers.js`.
 
 Next, import the `useTheme` function from [Chakra UI](https://chakra-ui.com/docs/getting-started):
 
-```
+```javascript
 import { useTheme } from '@chakra-ui/core';
 ```
 
 You can now pull the theme into your function and send it into the styled elements:
 
-```
+```javascript
 const BansheeSection = styled.section`
   display: flex;
   background-color: ${bgColor('accent')};
@@ -112,13 +112,13 @@ You can find all the theme values themselves at `<project-directory>/src/theme/t
 
 When adding a property to a component, we use [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) to validate at runtime that we got the right set of values of the right types. To add PropTypes validation first import the library:
 
-```
+```javascript
 import PropTypes from 'prop-types';
 ```
 
 Then, after your component function is defined, add a `propTypes` property to the function with whatever properties it is supposed to have. Follow [this link](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes) for documentation about what validation is available. Please avoid using `any` unless you have a good reason for it. Here's an example of making `Banshee` require a `target`:
 
-```
+```javascript
 Banshee.propTypes = {
   target: PropTypes.string.isRequired,
 };
@@ -126,7 +126,7 @@ Banshee.propTypes = {
 
 You can also give a property a default value if you wish. After defining the `propTypes` for a component, you can add a second property of `defaultProps`. Here's an example with `Banshee`:
 
-```
+```javascript
 Banshee.defaultProps = {
   target: 'Crucifix Lady',
 };
@@ -134,7 +134,7 @@ Banshee.defaultProps = {
 
 Your validation is now setup, so go ahead and destructure the property out of the `props` object sent to your component:
 
-```
+```javascript
 function Banshee({ target }) {
   /* component code */
 }
