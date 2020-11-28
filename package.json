@@ -53,7 +53,7 @@
     "electron": "electron .",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "publish-storybook": "npm run build-storybook && git subtree push --prefix storybook-static/ origin gh-pages",
+    "publish-storybook": "git subtree push --prefix storybook-static/ origin gh-pages",
     "lint": "eslint --fix ."
   },
   "lint-staged": {
