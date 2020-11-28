@@ -3,3 +3,13 @@ import { Meta } from '@storybook/addon-docs/blocks';
 <Meta title="Docs/Linting" />
 
 # Linting
+
+This project uses a combination of [eslint](https://eslint.org/) and [prettier](https://prettier.io/) to handle [linting](https://en.wikipedia.org/wiki/Lint_(software)). Linting helps find bugs, errors, and enforce stylistic choices. The config files for these tools are at the project root directory in:  
+`.eslintignore`  
+`.eslintrc.js`  
+`.prettierrc.js`
+
+When you run `npx eslint --fix .` from the root directory of the project it will flag any errors it finds and make any fixes in place that it knows are safe. It's also hoooked up to use `prettier`, so that command will also reformat files. Many IDE's/editors can also hook up to automatically run the linter on save, from VSCode, to Atom, to Sublime, to vim. [Here is information about integrations in various editors](https://eslint.org/docs/user-guide/integrations#editors).
+
+
+Lastly, when you run `npm install` in this project it will create a git hook (thanks to [husky](https://typicode.github.io/husky/#/)) that will run right before you commit. That hook will run `eslint --fix .` on your project for you, and will fail the commit if it finds linting errors it cannot fix. This is to ensure that no commited code fails linting and our code quality stays high.
