@@ -4,10 +4,7 @@ import styled from 'styled-components';
 
 import Dot from '../Dot';
 
-const DotGroupContainer = styled.div.attrs({
-  className: 'DotGroup',
-  role: 'radiogroup',
-})`
+const DotGroupContainer = styled.div`
   display: flex;
   width: min-content;
 `;
@@ -48,7 +45,11 @@ function DotGroup({
   };
 
   return (
-    <DotGroupContainer className={`DotGroup ${className}`} {...props}>
+    <DotGroupContainer
+      className={`DotGroup ${className}`}
+      role="radiogroup"
+      {...props}
+    >
       {zeroDot && <Dot zero={true} onClick={() => handleValueChanged(0)} />}
       {dots.map(dotValue => (
         <Dot
