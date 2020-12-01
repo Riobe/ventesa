@@ -38,7 +38,7 @@ NOTE: Please keep the comment before the function and fill it out. Not only does
 import Banshee from '../Banshee';
 ```
 
-## Styling your Component
+## Styling your component
 
 We're currently styling our components using the fantastic [styled-components](https://styled-components.com/docs) library. This allows us to style components directly in our js files while using natural CSS and programmatically change styles based on props.
 
@@ -108,7 +108,7 @@ function Banshee() {
 
 You can find all the theme values themselves at `<project-directory>/src/theme/theme.js`.
 
-## Adding Props and Validation
+## Adding props and validation
 
 When adding a property to a component, we use [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) to validate at runtime that we got the right set of values of the right types. To add PropTypes validation first import the library:
 
@@ -140,7 +140,7 @@ function Banshee({ target }) {
 }
 ```
 
-## Considerations for Other Files
+## Considerations for other files
 
 • Every component, unless you have a *very* good reason, should also have a test file: `*.spec.js`. If nothing else, just test that the component renders successfully. Please see the testing documentation on how to do this.  
 • Any component that is meant to be reusable should also have a `*.stories.js` file. Please see the Storybook documentation on how to do this.

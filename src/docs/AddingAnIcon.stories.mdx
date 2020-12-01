@@ -3,3 +3,134 @@ import { Meta } from '@storybook/addon-docs/blocks';
 <Meta title="Docs/Adding an Icon" />
 
 # Adding a Icon
+
+Our icons are SVG's which we use for the scalability right in the name. We're using [Chakra-UI Icons](https://v0.chakra-ui.com/icon) to handle these. There are a few steps which we go through to get an SVG prepared for this. Let's take a simple hexagon found on [Wikimedia](https://upload.wikimedia.org/wikipedia/commons/8/85/Cyclohexane_simple.svg):
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="480" height="543.03003" viewBox="0 0 257.002 297.5" xml:space="preserve">
+  <g transform="matrix(0.8526811,0,0,0.8526811,18.930632,21.913299)">
+    <polygon points="8.003,218.496 0,222.998 0,74.497 8.003,78.999 8.003,218.496 "/>
+    <polygon points="128.501,287.998 128.501,297.5 0,222.998 8.003,218.496 128.501,287.998 "/>
+    <polygon points="249.004,218.496 257.002,222.998 128.501,297.5 128.501,287.998 249.004,218.496 "/>
+    <polygon points="249.004,78.999 257.002,74.497 257.002,222.998 249.004,218.496 249.004,78.999 "/>
+    <polygon points="128.501,9.497 128.501,0 257.002,74.497 249.004,78.999 128.501,9.497 "/>
+    <polygon points="8.003,78.999 0,74.497 128.501,0 128.501,9.497 8.003,78.999 "/>
+  </g>
+</svg>
+```
+
+## SVGOMG - Minimizing the icon
+
+The first step is to make the markup as small as possible. To achieve this we are using [SVGOMG](https://svgomg.firebaseapp.com/). Just open the site, click Paste Markup and paste. Or if you have a downloaded file you can Open SVG to get to it. Once you've done so, switch to the Code tab and use the minified markup. Even for our hexagon this results in a simplified and smaller markup:
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" version="1" width="480" height="543.03" viewBox="0 0 257.002 297.5">
+  <path d="M25.755 208.22l-6.824 3.84V85.434l6.824 3.84V208.22z"/>
+  <path d="M128.501 267.484v8.102l-109.57-63.527 6.824-3.838L128.5 267.484z"/>
+  <path d="M231.252 208.22l6.82 3.84L128.5 275.585v-8.102l102.75-59.263z"/>
+  <path d="M231.252 89.274l6.82-3.839V212.06l-6.82-3.838V89.274z"/>
+  <path d="M128.501 30.011v-8.098l109.57 63.522-6.82 3.84-102.75-59.264zM25.755 89.274l-6.824-3.839L128.5 21.913v8.098L25.755 89.274z"/>
+</svg>
+```
+
+Keep this markup for a moment, we'll need it soon.
+
+## Creating your icon file
+
+Every icon gets it's own file in `<project-directory>/src/theme/icons/` named after it. So for this icon we'll make `<project-directory>/src/theme/icons/hexagon.js`. You will need to import React into this file because it will be returning JSX, and then you'll export a config object. Let's get our boilerplate out of the way:
+
+```javascript
+import React from 'react';
+
+export default {
+  path: (
+    /* We need a value here, keep going */
+  )
+};
+```
+
+That won't build yet, but we'll get to that in the next step.
+
+## Putting the SVG into the project
+
+You won't actually need the `<svg>` tag itself, because the `Icon` component will wrap your SVG tags in that for you. So let's move the the insides of the `<svg>` tag into our path variable:
+
+```javascript
+import React from 'react';
+
+/* THIS WILL ERROR, READ BELOW */
+export default {
+  path: (
+    <path d="M25.755 208.22l-6.824 3.84V85.434l6.824 3.84V208.22z"/>
+    <path d="M128.501 267.484v8.102l-109.57-63.527 6.824-3.838L128.5 267.484z"/>
+    <path d="M231.252 208.22l6.82 3.84L128.5 275.585v-8.102l102.75-59.263z"/>
+    <path d="M231.252 89.274l6.82-3.839V212.06l-6.82-3.838V89.274z"/>
+    <path d="M128.501 30.011v-8.098l109.57 63.522-6.82 3.84-102.75-59.264zM25.755 89.274l-6.824-3.839L128.5 21.913v8.098L25.755 89.274z"/>
+  ),
+};
+```
+
+This won't build yet because you can only have one element at the top level and this is 5 `<path>` elements next to eachother. Thankfully, in SVG we can always "group" things by putting a `<g>` tag around them. So we'll modify this by wrapping the `<path>` elements in a `<g>` tag:
+
+```javascript
+import React from 'react';
+
+export default {
+  path: (
+    <g>
+      <path d="M25.755 208.22l-6.824 3.84V85.434l6.824 3.84V208.22z"/>
+      <path d="M128.501 267.484v8.102l-109.57-63.527 6.824-3.838L128.5 267.484z"/>
+      <path d="M231.252 208.22l6.82 3.84L128.5 275.585v-8.102l102.75-59.263z"/>
+      <path d="M231.252 89.274l6.82-3.839V212.06l-6.82-3.838V89.274z"/>
+      <path d="M128.501 30.011v-8.098l109.57 63.522-6.82 3.84-102.75-59.264zM25.755 89.274l-6.824-3.839L128.5 21.913v8.098L25.755 89.274z"/>
+    </g>
+  ),
+};
+```
+
+This is closer, but to get this right all of these path values need to draw on a viewport defined by the `viewBox` property. Thankfully, in that simplified SVGOMG markup the `<svg>` element itself had that: `viewBox="0 0 257.002 297.5"` We don't need the `xmlns`, `version`, `width`, or `height` attributes, but we *will* need the `viewBox`. Include it like so:
+
+```javascript
+import React from 'react';
+
+export default {
+  path: (
+    <g>
+      <path d="M25.755 208.22l-6.824 3.84V85.434l6.824 3.84V208.22z"/>
+      <path d="M128.501 267.484v8.102l-109.57-63.527 6.824-3.838L128.5 267.484z"/>
+      <path d="M231.252 208.22l6.82 3.84L128.5 275.585v-8.102l102.75-59.263z"/>
+      <path d="M231.252 89.274l6.82-3.839V212.06l-6.82-3.838V89.274z"/>
+      <path d="M128.501 30.011v-8.098l109.57 63.522-6.82 3.84-102.75-59.264zM25.755 89.274l-6.824-3.839L128.5 21.913v8.098L25.755 89.274z"/>
+    </g>
+  ),
+  viewBox: '0 0 257.002 297.5',
+};
+```
+
+This file is now done!
+
+## Including the icon in the theme
+
+You're almost done, but the last thing is that it needs to be exported from `<project-directory>/src/theme/icons/index.js` which is thankfully a one line change in this file!
+
+```javascript
+export { default as hexagon } from './hexagon';
+```
+
+You're done!! The icon is now available for use! Make sure to note the `as <name>` here, as this `<name>` will be used when actually rendering the icon. In this example the `<name>` is "hexagon".
+
+## Using the icon
+
+To actually *use* the icon you'll first pull in the [Icon component from Chakra UI](https://v0.chakra-ui.com/icon):
+
+```javascript
+import { Icon } from '@chakra-ui/core';
+```
+
+To use it just use the `Icon` component:
+
+```javascript
+<Icon name="hexagon" />
+```
+
+Refer to the documentation on the component for the [other properties](https://v0.chakra-ui.com/icon#props) available.

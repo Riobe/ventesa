@@ -3,3 +3,79 @@ import { Meta } from '@storybook/addon-docs/blocks';
 <Meta title="Docs/Storybook" />
 
 # Storybook
+
+[Storybook](https://storybook.js.org/) is how we document the project from *within* the project, and how you're reading this page right now. It looks at your project, or wherever you've configured, for files ending in `*.stories.mdx` or `*.stories.js` and builds them into pages.
+
+When creating a reusable component, please create a set of storybook stories for it. These do a few things for us: They allow you to demonstrate what the component looks like, let you try it out with various inputs and ensure it looks right in isolation, gives you a place to document how it works, and show others how to use the component with a building example. For components that are purely structural like the sidebar you can skip writing stories.
+
+## Starting your stories file
+
+When you create your file for writing stories, you'll name it the same thing as the file that is *being* documented except ending with `.stories.js` instead of `.js`. For instance, this should be your structure for the `Banshee` component and it's stories file:
+
+```bash
+src/
+ components/
+   Banshee/
+     index.js
+     Banshee.js
+     Banshee.stories.js
+```
+
+`Banshee.stories.js` would document `Banshee.js` in this example. Once you've created your stories file, import `React` and the component being documented. Example:
+
+```javascript
+import React from 'react';
+import Banshee from './Banshee';
+```
+
+## Default export
+
+The first item in your `*.stories.js` file should be the `export default` statement. The [default export](https://storybook.js.org/docs/react/api/csf#default-export) in your stories file will be used to name and group the stories, to tie it to a component, and to define the subtitle (among other options that can be done). You will be exporting an object with a `title` property that works almost as a directory structure as well. When documenting components the title should look like `Components/Banshee` for the `Banshee` component. Then, send in the component itself in the `component` property, and the subtitle in the `parameters.componentSubtitle` property if you find one relevant. Example:
+
+```javascript
+export default {
+  title: 'Components/Banshee',
+  component: Banshee,
+  parameters: {
+    componentSubtitle:
+      'This entity prefers to focus on one player at a time.',
+  },
+};
+```
+
+## Stories
+
+Once you've created an entry for the component with the default export, you can export "stories" which will be examples of how to use the component. These will show up in Storybook with the same name as what they are exported as, with underscores being turned into spaces. The content of these exports should be React components themselves, though they can often times be very simple. Just output the component how you want it demonstrated, which can be wrapped in containers, or with various arguments.
+
+```javascript
+export const Example = () => <Banshee target="Wood Golem" />;
+```
+## Knobs, or how to play with parameters in Storybook
+ 
+This project uses the Storybook add-on [Knobs](https://github.com/storybookjs/storybook/tree/master/addons/knobs) to allow the stories for a component to come with a sidebar that allows the reader to change values for the inputs to a component and have it re-render right there. This allows you to see many different states of a component very quickly.
+
+To use knobs first import the ones you want from [this list of available knobs](https://github.com/storybookjs/storybook/tree/master/addons/knobs#available-knobs) like so:
+
+```javascript
+import { text } from '@storybook/addon-knobs';
+
+/* ... */
+
+export const Example = () => <Banshee target={text('Target', 'Wood Golem')} />;
+```
+
+The first argument to `text` in this example is the label that will show up. The second is the default value. [Refer to the documentation for more information.](https://github.com/storybookjs/storybook/tree/master/addons/knobs#available-knobs]
+
+# Actions
+
+You can also get a log of events that have happened, so you can easily see if a component responded to your click, or mouse over, or window resize. Whatever it may be, if you use the `action` function from the [Actions](https://github.com/storybookjs/storybook/tree/master/addons/actions) add-on, then it will show up in the Actions entry in the sidebar. `action` takes in a name, and returns a function that will log that name to the Actions panel when called. For instance:
+
+```javascript
+import { action } from '@storybook/addon-actions';
+
+/* ... */
+
+export const Example = () => <Banshee target="Wood Golem" onHunted={action('onHunted')} />;
+```
+
+This story will render a `<Banshee />` component and log to the Actions panel when the `onHunted` event is fired. This can be quite useful for poking at a component.

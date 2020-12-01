@@ -110,7 +110,7 @@ it('should hunt allow the target to be set to a non-default value.', async () =>
 
 ## Mocking
 
-### Mock Functions
+### Mock functions
 
 Jest has built in [mock functions](https://jestjs.io/docs/en/mock-functions) that you can easily create using `jest.fn()`. If you need an implementation, you can send it into it like so: `jest.fn(x => x + 1)`. These allow you to test the usage of callbacks.
 
@@ -134,7 +134,7 @@ describe('Array.prototype.map', () => {
 
 [Here is the mock API documentation](https://jestjs.io/docs/en/mock-function-api) from Jest itself.
 
-### Mocking Modules
+### Mocking modules
 
 You can also mock an entire module worth of values in one go. By just doing `jest.mock('./path/to/module')` before importing it in, you can mock all of the function properties returned by that module. You can then `import` the module yourself and it will be usable as a mock complete with `mockClear()` function on it.
 
@@ -178,7 +178,7 @@ describe('Banshee', () => {
 });
 ```
 
-## Testing UI Events
+## Testing UI events
 
 To test events, pull in the [fireEvent](https://testing-library.com/docs/dom-testing-library/api-events) function from [React Testing Library](https://testing-library.com/docs/react-testing-library/intro). Once you've used one of the [queries](https://testing-library.com/docs/dom-testing-library/api-queries) to get a DOM element, you can use `fireEvent` to send it an event and then test that the component responds correctly.
 
