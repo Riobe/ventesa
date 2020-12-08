@@ -1,9 +1,10 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { ThemeProvider } from '@chakra-ui/core';
 
 import theme from '../../theme';
 import Sidebar from './Sidebar';
+import userEvent from '@testing-library/user-event';
 
 describe('Sidebar', () => {
   it('should render successfully.', async () => {
