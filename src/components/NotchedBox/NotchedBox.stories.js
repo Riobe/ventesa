@@ -1,7 +1,7 @@
 import React from 'react';
 import NotchedBox from './NotchedBox';
 
-import { number, text } from '@storybook/addon-knobs';
+import { number } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components/NotchedBox',
