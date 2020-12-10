@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import { Icon, useTheme } from '@chakra-ui/core';
 import { accent, bgColor } from '../../theme';
 
-const NotchSize = '35px';
-
 const NotchedBoxContainer = styled.div`
   position: relative;
   padding: 2px;
@@ -14,7 +12,7 @@ const NotchedBoxContainer = styled.div`
 `;
 
 const NotchedBoxContent = styled.div`
-  --notchSize: ${NotchSize};
+  --notchSize: ${props => props.notchSize};
   background-color: ${bgColor('primary')};
   color: white;
   padding: 2em;
@@ -34,7 +32,7 @@ const NotchedBoxContent = styled.div`
   );
 `;
 const NotchedBoxBorder = styled.div`
-  --notchSize: ${NotchSize};
+  --notchSize: ${props => props.notchSize};
   background-color: #adadad;
   position: absolute;
   width: 100%;
@@ -56,19 +54,26 @@ const NotchedBoxBorder = styled.div`
   );
 `;
 
-function NotchedBox({ children }) {
+function NotchedBox({ children, notchSize }) {
   const theme = useTheme();
 
   return (
     <NotchedBoxContainer theme={theme}>
-      <NotchedBoxContent theme={theme}>{children}</NotchedBoxContent>
-      <NotchedBoxBorder theme={theme} />
+      <NotchedBoxContent theme={theme} notchSize={notchSize}>
+        {children}
+      </NotchedBoxContent>
+      <NotchedBoxBorder theme={theme} notchSize={notchSize} />
     </NotchedBoxContainer>
   );
 }
 
 NotchedBox.propTypes = {
   children: PropTypes.node.isRequired,
+  notchSize: PropTypes.number.isRequired,
+};
+
+NotchedBox.defaultProps = {
+  notchSize: '35px',
 };
 
 export default NotchedBox;

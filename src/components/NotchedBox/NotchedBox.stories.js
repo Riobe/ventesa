@@ -1,7 +1,7 @@
 import React from 'react';
 import NotchedBox from './NotchedBox';
 
-import { number } from '@storybook/addon-knobs';
+import { number, text } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components/NotchedBox',
@@ -13,11 +13,12 @@ export default {
 
 export const NotchedExample = () => (
   <NotchedBox
-    NotchSize={number('Notch Size', 35, {
-      range: true,
-      min: 0,
-      max: 100,
-      step: 1,
-    })}
+    notchSize={
+      number('Notch Size', 35, {
+        range: true,
+        min: 1,
+        max: 100,
+      }).toString() + 'px'
+    }
   />
 );
