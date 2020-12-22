@@ -2,8 +2,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Icon, useTheme } from '@chakra-ui/core';
-import { accent, bgColor } from '../../theme';
+import { useTheme } from '@chakra-ui/core';
+import { bgColor } from '../../theme';
 
 const NotchedBoxContainer = styled.div`
   position: relative;
@@ -69,7 +69,7 @@ function NotchedBox({ children, notchSize }) {
 
 NotchedBox.propTypes = {
   children: PropTypes.node.isRequired,
-  notchSize: PropTypes.number.isRequired,
+  notchSize: PropTypes.string.isRequired,
 };
 
 NotchedBox.defaultProps = {

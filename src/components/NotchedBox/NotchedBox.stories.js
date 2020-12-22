@@ -18,7 +18,7 @@ export const NotchedExample = () => (
         range: true,
         min: 1,
         max: 100,
-      }).toString() + 'px'
+      }) + 'px'
     }
   />
 );
