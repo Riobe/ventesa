@@ -1,12 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { ThemeProvider } from '@chakra-ui/core';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import * as serviceWorker from './serviceWorker';
+import theme from './theme';
+
+import Layout from './components/Layout';
+
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <ThemeProvider theme={theme}>
+        <Layout />
+      </ThemeProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root'),
 );

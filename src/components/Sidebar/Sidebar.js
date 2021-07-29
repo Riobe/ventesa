@@ -1,7 +1,7 @@
 import React from 'react';
-
 import styled from 'styled-components';
 import { Icon, useTheme } from '@chakra-ui/core';
+
 import { accent, bgColor } from '../../theme';
 
 const Nav = styled.section`

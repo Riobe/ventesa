@@ -4,15 +4,7 @@ import styled from 'styled-components';
 
 const defaultSize = '0.75rem';
 
-const DotDiv = styled.div.attrs({
-  className: 'Dot',
-  // In practice a single dot would be a checkbox, but they're
-  // only really intended for use in a DotGroup, which will act as a
-  // radiogroup, and not on their own.
-  //
-  // See Also: https://www.w3.org/TR/wai-aria-1.1/#radio
-  role: 'radio',
-})`
+const DotContainer = styled.div`
   width: ${defaultSize};
   height: ${defaultSize};
   border: 0.2rem solid black;
@@ -38,23 +30,34 @@ const DotDiv = styled.div.attrs({
   &::before {
     position: absolute;
     top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    right: -0.3rem;
     content: "\\274c";
     font-size: 1rem; 
     color: rgba(255, 0, 0, .45);
     line-height: ${defaultSize};
-    text-align: center;
   }
   `}
 `;
 
 /**
- * Use `Dot` to represent an individual point in some value on a character.
+ * Use `Dot` to represent an individual point in some value on a character. This will
+ * likely not often be used alone, but mostly in a `DotGroup` to represent attributes,
+ * abilities, merits, etc.
  */
 function Dot(props) {
-  return <DotDiv aria-checked={props.checked} {...props} />;
+  // In practice a single dot would be a checkbox, but they're
+  // only really intended for use in a DotGroup, which will act as a
+  // radiogroup, and not on their own.
+  //
+  // See Also: https://www.w3.org/TR/wai-aria-1.1/#radio
+  return (
+    <DotContainer
+      aria-checked={props.checked}
+      className="Dot"
+      role="radio"
+      {...props}
+    />
+  );
 }
 
 Dot.propTypes = {

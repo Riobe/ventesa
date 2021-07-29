@@ -3,3 +3,38 @@ import { Meta } from '@storybook/addon-docs/blocks';
 <Meta title="Docs/Getting Started" />
 
 # Getting Started
+
+This documentation is to describe the project structure, project conventions, and anything else useful for ramping up. It should be treated as a living document that will grow as the project grows.
+
+### Project structure
+
+`<project-directory>/`:  
+Files at the root of the project like `package.json` and `README.md` should be applicable to the entire project. Don't expect to add much more then project-wide configuration here.
+
+`<project-directory>/public`:  
+This is where we put the static files that aren't built and bundled. The index.html is here and will be used to point at the build bundle when it is made.
+
+`<project-directory>/src`:  
+The `src` directory is where all of our application and UI files go. This is the stuff that will get buncled up when the project is built. Files at the root directory include the entry point to the project `index.js`, the entry point for electron, and other root level items that are intended to get the project going.
+
+`<project-directory>/src/components`:  
+The `components/` directory is where all of our custom React components will be put. We'll spend a lot of time here. Subdirectories for groups of components can be added, and each component gets it's own directory with a barrel (index.js to export it), it's file, it's tests, and it's stories (if relevant).
+
+`<project-directory>/src/docs`:  
+Where the storybook docs not tied to a particular component go. This documentation itself is in this directory. These use mdx which is a mix of Markdown syntax and JSX.
+
+`<project-directory>/src/theme`:  
+The theme directory is for everything around site-wide theme elements: Our breakpoints, colors, icons, etc. Please add new SVG icons under the `icons/` directory in this spot.
+
+`<project-directory>/src/*`:  
+The rest is probably still being worked on and isn't set in stone (or we need to update the documentation!).
+
+### Coding conventions
+
+Order of imports:
+
+1) Import React (if used)  
+2) Without a newline, import all npm modules.  
+3) After a newline from `node_modules` imports, import any utility items like the theme or stuff from `lib/`  
+4) After a newline from the previous group of imports, import any custom React components.  
+5) After a newline from the previous group of imports, import any CSS files.

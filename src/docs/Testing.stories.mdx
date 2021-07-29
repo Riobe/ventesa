@@ -3,3 +3,202 @@ import { Meta } from '@storybook/addon-docs/blocks';
 <Meta title="Docs/Testing" />
 
 # Testing
+
+Testing is an important way to allow your project to grow and ensure that completed functionality remains that way. It allows full regression of your system in an automated and repeatable fasion. In this project we use [Jest](https://jestjs.io/) as the testing framework for all tests. When testing React components, we use [React Testing Library](https://testing-library.com/docs/) to aid us in testing in a more natural style, interacting with the page like the user would.
+
+## Starting your test file
+
+When you create your file for testing, you'll name it the same thing as the file that is *being* tested except ending with `.spec.js` instead of `.js`. For instance, this should be your structure for the `Banshee` component and it's test file:
+
+```bash
+src/
+ components/
+   Banshee/
+     index.js
+     Banshee.js
+     Banshee.spec.js
+```
+
+`Banshee.spec.js` would test `Banshee.js` in this example. "spec" is short for "specification" and goes with the notion that the tests for a module/file create a set of specifications on how it should work.
+
+Once you've created your spec file, import `React` if you are testing a React component and then import the file being tested either way. Example:
+
+```javascript
+import React from 'react';
+import Banshee from './Banshee';
+```
+
+## Organizing tests
+
+Next you'll want to put your tests in a group so that in the output things can be well formatted and when many files of tests are run, you can tell which tests go to which modules. To do this you use the `describe` function that takes in two values: a name for what this group of tests are describing, and a function which defines the tests. There should be at least one `describe` per `spec.js` file, though you can nest them if you want.
+
+```javascript
+describe('Banshee', () => {
+  /* Describe tests here. */
+});
+```
+
+In the `describe` you can create variables, define functions, run code before or after all or every test, and of course define the tests themselves. For instance, if you want to reset a value before each test then you could do something like this.
+
+```javascript
+describe('Banshee', () => {
+  let target;
+
+  beforeEach(() => {
+    target = 'Crucifix Lady';
+  });
+});
+```
+
+## Creating individual tests
+
+To define a test, use the `it()` function, which takes in two values: A test name in string form, and a function that constitutes the test. To understand the test naming, imagine them in a sentence after the string given to the `describe` function. So if you're `describe`ing `'Banshee'` then you might want to make a test like this:
+
+```javascript
+describe('Banshee', () => {
+  it('should hunt the Crucifix Lady by default.', async () => {
+  });
+});
+```
+
+In this example you could read this test as "Banshee should hunt the Crucifix Lady by default." Or, "When I describe a Banshee, it should hunt the Crucifix Lady by default." By naming tests in this way, it is more clear that these are specifications for how the module being tested should behave.
+
+The reason that we're using `async` for the function, is so that if you do something that needs to wait on a promise, the test will know how to handle it.
+
+## Arrange / Act / Assert
+
+An individual test usually has 3 major sections. In the first section you will Arrange, meaning you will create any data that you need to run this test. For instance:
+
+```javascript
+it('should allow the target to be set to a non-default value.', async () => {
+  // Arrange
+  const banshee = getBanshee(); // Going to ignore how we create this for this example.
+  const desiredTarget = 'Wood Golem';
+});
+```
+
+Once we have arranged the data we need, we're on to the Act step where we actually perform the actions that are being tested.
+
+```javascript
+it('should hunt allow the target to be set to a non-default value.', async () => {
+  // Arrange
+  const banshee = getBanshee(); // Going to ignore how we create this for this example.
+  const desiredTarget = 'Wood Golem';
+
+  // Act
+  banshee.setTarget(desiredTarget);
+  const newTarget = banshee.getTarget();
+});
+```
+
+Lastly, we Assert that the results we wanted are what we got. Since we use Jest, you might want to look into the various matchers you can use. These are the things like `expect(/* ... */).toBe(someValue)`. You'll find documentation on them here: [Jest Expect](https://jestjs.io/docs/en/expect)
+
+```javascript
+it('should hunt allow the target to be set to a non-default value.', async () => {
+  // Arrange
+  const banshee = getBanshee(); // Going to ignore how we create this for this example.
+  const desiredTarget = 'Wood Golem';
+
+  // Act
+  banshee.setTarget(desiredTarget);
+  const newTarget = banshee.getTarget();
+
+  // Assert
+  expect(newTarget).toBe(desiredTarget);
+});
+```
+
+## Mocking
+
+### Mock functions
+
+Jest has built in [mock functions](https://jestjs.io/docs/en/mock-functions) that you can easily create using `jest.fn()`. If you need an implementation, you can send it into it like so: `jest.fn(x => x + 1)`. These allow you to test the usage of callbacks.
+
+Here's a simple example of ensuring that `.map()` used a callback 5 times.
+
+```javascript
+describe('Array.prototype.map', () => {
+  it('should call the given function for each item in the array.', async () => {
+    // Arrange
+    const array = [1, 2, 3, 4, 5];
+    const callback = jest.fn(x => x);
+
+    // Act
+    const created = array.map(callback);
+
+    // Assert
+    expect(callback).toHaveBeenCalledTimes(5);
+  });
+});
+```
+
+[Here is the mock API documentation](https://jestjs.io/docs/en/mock-function-api) from Jest itself.
+
+### Mocking modules
+
+You can also mock an entire module worth of values in one go. By just doing `jest.mock('./path/to/module')` before importing it in, you can mock all of the function properties returned by that module. You can then `import` the module yourself and it will be usable as a mock complete with `mockClear()` function on it.
+
+```javascript
+jest.mock('./d10');
+const d10 = require('./d10');
+
+describe('roller', () => {
+  beforeEach(() => {
+    d10.mockClear();
+  });
+
+  it('should roll a single dice if told to.', async () => {
+    d10.mockReturnValue(8);
+    /* ... rest of test */
+  });
+
+  /* ... rest of the tests. */
+});
+```
+
+It will generally be a good idea to `mockClear` your mocks before each test regardless of the method you're using.
+
+## Testing UI
+
+When testing a React component, beyond importing the component itself you'll also need to pull in React and the [render](https://testing-library.com/docs/react-testing-library/api#render) function from [React Testing Library](https://testing-library.com/docs/react-testing-library/intro). This will allow you to send in JSX and get functions out that you can use to assert against. [Here are the queries](https://testing-library.com/docs/dom-testing-library/api-queries) returned from the `render` function. For instance, one of the most basic assertions to check against is `toBeInTheDocument`. Here's an example:
+
+```javascript
+import React from 'react';
+import { render } from '@testing-library/react';
+import Banshee from './Banshee';
+
+describe('Banshee', () => {
+  it('should render successfully.', async () => {
+    const { getByLabelText } = render(<Banshee />);
+
+    const target = getByLabelText('Target');
+
+    expect(target).toBeInTheDocument();
+  });
+});
+```
+
+## Testing UI events
+
+To test events, pull in the [fireEvent](https://testing-library.com/docs/dom-testing-library/api-events) function from [React Testing Library](https://testing-library.com/docs/react-testing-library/intro). Once you've used one of the [queries](https://testing-library.com/docs/dom-testing-library/api-queries) to get a DOM element, you can use `fireEvent` to send it an event and then test that the component responds correctly.
+
+Here's an example with our `Banshee` example component:
+
+```javascript
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import Banshee from './Banshee';
+
+describe('Banshee', () => {
+  it('should hunt the Banshee target when the Hunt button is clicked.', async () => {
+    const { getByText, getByLabelText } = render(<Banshee />);
+
+    const huntButton = getByText('Hunt');
+
+    fireEvent.click(huntButton);
+    const targetKilled = getByLabelText('Target');
+
+    expect(targetKilled.value).toBe('Crucifix Lady');
+  });
+});
+```
