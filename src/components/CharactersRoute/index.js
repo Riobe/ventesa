@@ -1,1 +1,1 @@
-export { default } from './CharacterRoute';
+export { default } from './CharactersRoute';

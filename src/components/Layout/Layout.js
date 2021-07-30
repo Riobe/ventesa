@@ -1,10 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTheme } from '@chakra-ui/core';
 
 import { accent, bgColor, breakpoint, BREAKPOINT_SM } from '../../theme';
 import Sidebar from '../Sidebar';
-import NotchedBox from '../NotchedBox';
 import TypedChat from '../TypedChat';
 import ChatRoll from '../ChatRoll';
 import CharactersRoute from '../CharactersRoute';
@@ -58,7 +58,7 @@ const Chat = styled.section`
 `;
 
 const Temp = () => {
-  return <h1>Fuck you jeremy</h1>;
+  return <h1>Test Component</h1>;
 };
 
 function Layout() {
@@ -70,18 +70,20 @@ function Layout() {
         <h1>Exalted VTT</h1>
       </Title>
       <Sidebar />
-      <Route exact path="/">
-        <Content theme={theme}>Content</Content>
-      </Route>
-      <Route exact path="/characters">
-        <CharactersRoute />
-      </Route>
-      <Route path="/characters/:id">
-        <Temp />
-      </Route>
-      <Route exact path="/combat">
-        <CombatRoute />
-      </Route>
+      <Switch>
+        <Route exact path="/">
+          <Content theme={theme}>Content</Content>
+        </Route>
+        <Route exact path="/characters">
+          <CharactersRoute />
+        </Route>
+        <Route path="/characters/:id">
+          <Temp />
+        </Route>
+        <Route exact path="/combat">
+          <CombatRoute />
+        </Route>
+      </Switch>
       <Chat theme={theme}>
         <ChatRoll />
         <ChatRoll />
