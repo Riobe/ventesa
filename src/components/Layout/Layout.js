@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon, useTheme } from '@chakra-ui/core';
+import { useTheme } from '@chakra-ui/core';
 
 import { accent, bgColor, breakpoint, BREAKPOINT_SM } from '../../theme';
 import Sidebar from '../Sidebar';
