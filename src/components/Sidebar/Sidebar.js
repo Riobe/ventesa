@@ -1,8 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Icon, useTheme } from '@chakra-ui/core';
 
 import { accent, bgColor } from '../../theme';
+
+const NavLinkStyled = styled(Link)`
+  display: grid;
+  grid-template-columns: 55px auto;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  margin-bottom: 30px;
+
+  justify-items: center;
+  align-items: center;
+
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: ${accent('primary')};
+
+    cursor: pointer;
+  }
+`;
 
 const Nav = styled.section`
   grid-area: nav;
@@ -99,12 +121,14 @@ const ExpandableNav = styled.div`
     max-width: calc(16rem + 55px);
   }
 `;
+
 const ICON_SIZE = '36px';
 
 const buttons = [
   {
     icon: 'home',
     text: 'Home',
+    link: '/',
   },
   {
     icon: 'book',
@@ -113,10 +137,7 @@ const buttons = [
   {
     icon: 'shield',
     text: 'Combat Mode',
-  },
-  {
-    icon: 'npcs',
-    text: 'NPCS',
+    link: '/combat',
   },
   {
     icon: 'charms',
@@ -124,7 +145,8 @@ const buttons = [
   },
   {
     icon: 'players',
-    text: 'Players',
+    text: 'Characters',
+    link: '/characters',
   },
 ];
 
@@ -137,10 +159,14 @@ function Sidebar() {
       <ExpandableNav theme={theme}>
         <NavButtons>
           {buttons.map(button => (
-            <NavWrapper theme={theme} key={button.text}>
+            <NavLinkStyled
+              theme={theme}
+              key={button.text}
+              to={button.link || '/'}
+            >
               <Icon name={button.icon} size={ICON_SIZE} />
               <div className="nav-link">{button.text}</div>
-            </NavWrapper>
+            </NavLinkStyled>
           ))}
         </NavButtons>
 

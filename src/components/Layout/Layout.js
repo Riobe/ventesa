@@ -7,6 +7,8 @@ import Sidebar from '../Sidebar';
 import NotchedBox from '../NotchedBox';
 import TypedChat from '../TypedChat';
 import ChatRoll from '../ChatRoll';
+import CharactersRoute from '../CharactersRoute';
+import CombatRoute from '../CombatRoute';
 
 const LayoutGrid = styled.div`
   height: 100%;
@@ -38,8 +40,6 @@ const Title = styled.header`
 
 const Content = styled.section`
   grid-area: content;
-
-  border-right: 5px solid ${accent('primary')};
 `;
 
 const Chat = styled.section`
@@ -50,11 +50,16 @@ const Chat = styled.section`
   justify-content: flex-end;
 
   background-color: ${bgColor('nav')};
+  border-left: 5px solid ${accent('primary')};
 
   & > * {
     width: 100%;
   }
 `;
+
+const Temp = () => {
+  return <h1>Fuck you jeremy</h1>;
+};
 
 function Layout() {
   const theme = useTheme();
@@ -64,8 +69,19 @@ function Layout() {
       <Title theme={theme}>
         <h1>Exalted VTT</h1>
       </Title>
-      <Content theme={theme}>Content</Content>
       <Sidebar />
+      <Route exact path="/">
+        <Content theme={theme}>Content</Content>
+      </Route>
+      <Route exact path="/characters">
+        <CharactersRoute />
+      </Route>
+      <Route path="/characters/:id">
+        <Temp />
+      </Route>
+      <Route exact path="/combat">
+        <CombatRoute />
+      </Route>
       <Chat theme={theme}>
         <ChatRoll />
         <ChatRoll />
