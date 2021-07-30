@@ -137,7 +137,7 @@ function Sidebar() {
       <ExpandableNav theme={theme}>
         <NavButtons>
           {buttons.map(button => (
-            <NavWrapper theme={theme} key={button.id}>
+            <NavWrapper theme={theme} key={button.text}>
               <Icon name={button.icon} size={ICON_SIZE} />
               <div className="nav-link">{button.text}</div>
             </NavWrapper>
