@@ -86,7 +86,7 @@ const PinnableButtonRight = styled.button.attrs({
   background-image: linear-gradient(
     to left,
     ${bgColor('primary')} 50%,
-    ${bgColor('button')} 50%
+    ${bgColor('title')} 50%
   );
 
   transition: background-position 0.2s;
@@ -147,7 +147,7 @@ const CloseButton = styled.button.attrs({
   background-image: linear-gradient(
     to left,
     ${bgColor('primary')} 50%,
-    ${bgColor('button')} 50%
+    ${bgColor('title')} 50%
   );
 
   transition: background-position 0.08s;

@@ -4,6 +4,9 @@ import { useTheme } from '@chakra-ui/core';
 
 import { accent, bgColor, breakpoint, BREAKPOINT_SM } from '../../theme';
 import Sidebar from '../Sidebar';
+import NotchedBox from '../NotchedBox';
+import TypedChat from '../TypedChat';
+import ChatRoll from '../ChatRoll';
 
 const LayoutGrid = styled.div`
   height: 100%;
@@ -41,6 +44,16 @@ const Content = styled.section`
 
 const Chat = styled.section`
   grid-area: chat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  background-color: ${bgColor('nav')};
+
+  & > * {
+    width: 100%;
+  }
 `;
 
 function Layout() {
@@ -53,7 +66,12 @@ function Layout() {
       </Title>
       <Content theme={theme}>Content</Content>
       <Sidebar />
-      <Chat>Chat</Chat>
+      <Chat theme={theme}>
+        <ChatRoll />
+        <ChatRoll />
+        <ChatRoll />
+        <TypedChat />
+      </Chat>
     </LayoutGrid>
   );
 }
