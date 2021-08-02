@@ -15,6 +15,7 @@ const LayoutGrid = styled.div`
   display: grid;
 
   min-width: ${breakpoint(BREAKPOINT_SM)};
+  min-height: 660px;
 
   grid:
     4rem auto /
