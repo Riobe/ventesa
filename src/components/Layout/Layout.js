@@ -31,6 +31,8 @@ const Title = styled.header`
 
   background-color: ${bgColor('title')};
 
+  z-index: 1;
+
   & > h1 {
     font-size: 1.5rem;
   }
