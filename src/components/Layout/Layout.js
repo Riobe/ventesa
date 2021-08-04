@@ -1,22 +1,31 @@
 import React from 'react';
+import { BrowserRouter as Route, Switch } from 'react-router-dom';
+
 import styled from 'styled-components';
 import { useTheme } from '@chakra-ui/core';
-
 import { bgColor, breakpoint, BREAKPOINT_SM } from '../../theme';
+
 import Sidebar from '../Sidebar';
+import CharactersRoute from '../CharactersRoute';
+import CombatRoute from '../CombatRoute';
 
 const LayoutGrid = styled.div`
   height: 100%;
+
   margin: 0 auto;
+
   background-color: ${bgColor('primary')};
+
   display: grid;
 
   min-width: ${breakpoint(BREAKPOINT_SM)};
+
   min-height: 660px;
 
   grid:
     4rem auto /
     55px auto 18.75rem;
+
   grid-template-areas:
     'title  title   title'
     'nav    content chat';
@@ -48,8 +57,22 @@ function Layout() {
       <Title theme={theme}>
         <h1>Exalted VTT</h1>
       </Title>
+
       <Sidebar />
-      <Content theme={theme}>Content</Content>
+
+      <Switch>
+        <Route exact path="/">
+          <Content theme={theme}>Content</Content>
+        </Route>
+
+        <Route exact path="/characters">
+          <CharactersRoute />
+        </Route>
+
+        <Route exact path="/combat">
+          <CombatRoute />
+        </Route>
+      </Switch>
     </LayoutGrid>
   );
 }

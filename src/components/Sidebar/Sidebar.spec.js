@@ -1,4 +1,5 @@
 import React from 'react';
+import { MemoryRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@chakra-ui/core';
 
@@ -9,7 +10,10 @@ describe('Sidebar', () => {
   it('should render successfully.', async () => {
     const { getByText } = render(
       <ThemeProvider theme={theme}>
-        <Sidebar />
+        <Router>
+          <Sidebar />
+        </Router>
+        ,
       </ThemeProvider>,
     );
 
@@ -17,9 +21,8 @@ describe('Sidebar', () => {
       'Home',
       'Narrative Mode',
       'Combat Mode',
-      'NPCS',
       'Charms',
-      'Players',
+      'Characters',
     ];
 
     textLinks.forEach(textLink => {
