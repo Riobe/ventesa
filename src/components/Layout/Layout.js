@@ -2,11 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useTheme } from '@chakra-ui/core';
 
-import { accent, bgColor, breakpoint, BREAKPOINT_SM } from '../../theme';
+import { bgColor, breakpoint, BREAKPOINT_SM } from '../../theme';
 import Sidebar from '../Sidebar';
-import NotchedBox from '../NotchedBox';
-import TypedChat from '../TypedChat';
-import ChatRoll from '../ChatRoll';
 
 const LayoutGrid = styled.div`
   height: 100%;
@@ -41,22 +38,6 @@ const Title = styled.header`
 
 const Content = styled.section`
   grid-area: content;
-
-  border-right: 5px solid ${accent('primary')};
-`;
-
-const Chat = styled.section`
-  grid-area: chat;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-
-  background-color: ${bgColor('nav')};
-
-  & > * {
-    width: 100%;
-  }
 `;
 
 function Layout() {
@@ -67,14 +48,8 @@ function Layout() {
       <Title theme={theme}>
         <h1>Exalted VTT</h1>
       </Title>
-      <Content theme={theme}>Content</Content>
       <Sidebar />
-      <Chat theme={theme}>
-        <ChatRoll />
-        <ChatRoll />
-        <ChatRoll />
-        <TypedChat />
-      </Chat>
+      <Content theme={theme}>Content</Content>
     </LayoutGrid>
   );
 }
