@@ -142,7 +142,7 @@ const buttons = [
   {
     icon: 'charms',
     text: 'Charms',
-    link: '/Charms',
+    link: '/charms',
   },
   {
     icon: 'players',
