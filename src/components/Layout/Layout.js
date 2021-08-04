@@ -49,10 +49,6 @@ const Content = styled.section`
   grid-area: content;
 `;
 
-const Temp = () => {
-  return <h1>Test Component</h1>;
-};
-
 function Layout() {
   const theme = useTheme();
 
@@ -71,10 +67,6 @@ function Layout() {
 
         <Route exact path="/characters">
           <CharactersRoute />
-        </Route>
-
-        <Route path="/characters/:id">
-          <Temp />
         </Route>
 
         <Route exact path="/combat">
