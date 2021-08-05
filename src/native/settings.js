@@ -45,10 +45,9 @@ function getSettings(app) {
  */
 function handleSettings(app, window) {
   ensureSettingsFile(app);
-  const settings = getSettings(app);
 
   ipcMain.on(events.settingsRequested, () => {
-    window.webContents.send(events.settingsAcquired, settings);
+    window.webContents.send(events.settingsAcquired, getSettings(app));
   });
 }
 

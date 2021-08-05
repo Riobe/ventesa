@@ -84,6 +84,9 @@ describe('settings', () => {
     it('should read the data from the settings.json file.', async () => {
       settings.handleSettings(app, window);
 
+      const handler = ipcMain.on.mock.calls[0][1];
+      handler();
+
       expect(readJsonSync).toHaveBeenCalledTimes(1);
       expect(readJsonSync).toHaveBeenCalledWith(expectedPath);
     });
@@ -98,10 +101,11 @@ describe('settings', () => {
       );
 
       const handler = ipcMain.on.mock.calls[0][1];
-      const settingsData = readJsonSync.mock.results[0].value;
       expect(window.webContents.send).toHaveBeenCalledTimes(0);
 
       handler();
+
+      const settingsData = readJsonSync.mock.results[0].value;
 
       expect(window.webContents.send).toHaveBeenCalledTimes(1);
       expect(window.webContents.send).toHaveBeenCalledWith(
