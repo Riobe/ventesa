@@ -1,7 +1,6 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { IconButton, useTheme } from '@chakra-ui/core';
 import NotchedBox from '../NotchedBox';
 
 const ChatRollContainer = styled.div`

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 import { IconButton, useTheme } from '@chakra-ui/core';
-import { accent, bgColor } from '../../theme';
+import { bgColor } from '../../theme';
 
 const ChatBoxContainer = styled.div`
   border-top: 1px solid grey;

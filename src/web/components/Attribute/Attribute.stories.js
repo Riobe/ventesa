@@ -4,13 +4,15 @@ import { text, number } from '@storybook/addon-knobs';
 
 import Attribute from './Attribute';
 
-export default {
+const storybookConfig = {
   title: 'Components/Attribute',
   component: Attribute,
   parameters: {
     componentSubtitle: 'An Attribute row for an Exalted character.',
   },
 };
+
+export default storybookConfig;
 
 // Stories
 export const Example = () => (

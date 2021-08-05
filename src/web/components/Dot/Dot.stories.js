@@ -3,13 +3,15 @@ import { boolean } from '@storybook/addon-knobs';
 
 import Dot from './Dot';
 
-export default {
+const storybookConfig = {
   title: 'Components/Dot',
   component: Dot,
   parameters: {
     componentSubtitle: 'The basic Dot component of an Exalted character.',
   },
 };
+
+export default storybookConfig;
 
 // Stories
 export const Example = () => (

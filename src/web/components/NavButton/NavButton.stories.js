@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import NavButton from './NavButton';
 import VerticalDivider from '../VerticalDivider';
 
-export default {
+const storybookConfig = {
   title: 'Components/NavButton',
   component: NavButton,
   parameters: {
@@ -12,6 +12,8 @@ export default {
       'Button that handles navigation in the header and sub nav.',
   },
 };
+
+export default storybookConfig;
 
 // Stories
 export const Example = () => <NavButton>Button</NavButton>;

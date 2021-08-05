@@ -5,7 +5,7 @@ import { number, boolean } from '@storybook/addon-knobs';
 import styled from 'styled-components';
 import DotGroup from './DotGroup';
 
-export default {
+const storybookConfig = {
   title: 'Components/DotGroup',
   component: DotGroup,
   parameters: {
@@ -13,6 +13,8 @@ export default {
       'The DotGroup measures most character values in Exalted.',
   },
 };
+
+export default storybookConfig;
 
 const HorizontalDiv = styled.div`
   display: flex;

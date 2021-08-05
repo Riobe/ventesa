@@ -5,13 +5,15 @@ import { action } from '@storybook/addon-actions';
 import PinnableButton from './PinnableButton';
 import Panel from '../Panel';
 
-export default {
+const storybookConfig = {
   title: 'Components/PinnableButton',
   component: PinnableButton,
   parameters: {
     componentSubtitle: 'A pinnable button used to navigate recent routes.',
   },
 };
+
+export default storybookConfig;
 
 // Stories
 export const Example = () => (
