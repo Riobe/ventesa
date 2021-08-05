@@ -113,19 +113,9 @@ const ICON_SIZE = '36px';
 
 const buttons = [
   {
-    icon: 'home',
-    text: 'Home',
-    link: '/',
-  },
-  {
-    icon: 'book',
-    text: 'Narrative Mode',
-    link: '/narrative',
-  },
-  {
-    icon: 'shield',
-    text: 'Combat Mode',
-    link: '/combat',
+    icon: 'players',
+    text: 'Characters',
+    link: '/characters',
   },
   {
     icon: 'charms',
@@ -133,9 +123,19 @@ const buttons = [
     link: '/charms',
   },
   {
-    icon: 'players',
-    text: 'Characters',
-    link: '/characters',
+    icon: 'book',
+    text: 'Qualities',
+    link: '/qualities',
+  },
+  {
+    icon: 'shield',
+    text: 'Equipment',
+    link: '/equipment',
+  },
+  {
+    icon: 'fist',
+    text: 'Combat Mode',
+    link: '/combat',
   },
 ];
 
@@ -153,7 +153,6 @@ function Sidebar() {
               key={button.text}
               activeClassName="active"
               to={button.link || '/'}
-              exact={true}
             >
               <Icon name={button.icon} size={ICON_SIZE} />
               <div className="nav-link">{button.text}</div>

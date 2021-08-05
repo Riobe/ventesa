@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Route, Switch, Redirect } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { useTheme } from '@chakra-ui/core';
@@ -45,10 +45,6 @@ const Title = styled.header`
   }
 `;
 
-const Content = styled.section`
-  grid-area: content;
-`;
-
 function Layout() {
   const theme = useTheme();
 
@@ -62,14 +58,26 @@ function Layout() {
 
       <Switch>
         <Route exact path="/">
-          <Content theme={theme}>Content</Content>
+          <Redirect to="/characters" />
         </Route>
 
-        <Route exact path="/characters">
+        <Route path="/characters">
           <CharactersRoute />
         </Route>
 
-        <Route exact path="/combat">
+        <Route path="/charms">
+          <h1>charms</h1>
+        </Route>
+
+        <Route path="/qualities">
+          <h1>qualities</h1>
+        </Route>
+
+        <Route path="/equipment">
+          <h1>equipment</h1>
+        </Route>
+
+        <Route path="/combat">
           <CombatRoute />
         </Route>
       </Switch>
