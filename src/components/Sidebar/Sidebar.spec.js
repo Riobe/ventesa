@@ -18,11 +18,11 @@ describe('Sidebar', () => {
     );
 
     const textLinks = [
-      'Home',
-      'Narrative Mode',
-      'Combat Mode',
-      'Charms',
       'Characters',
+      'Charms',
+      'Qualities',
+      'Equipment',
+      'Combat Mode',
     ];
 
     textLinks.forEach(textLink => {
