@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@chakra-ui/core';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import * as serviceWorker from './serviceWorker';
-import theme from './theme';
+import * as serviceWorker from './web/serviceWorker';
+import theme from './web/theme';
 
-import Layout from './components/Layout';
+import Layout from './web/components/Layout';
 
 import './index.css';
+console.log('In Renderer');
 
 ReactDOM.render(
   <React.StrictMode>
