@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@chakra-ui/core';
 
@@ -10,10 +10,9 @@ describe('Sidebar', () => {
   it('should render successfully.', async () => {
     const { getByText } = render(
       <ThemeProvider theme={theme}>
-        <Router>
+        <MemoryRouter>
           <Sidebar />
-        </Router>
-        ,
+        </MemoryRouter>
       </ThemeProvider>,
     );
 
@@ -30,5 +29,25 @@ describe('Sidebar', () => {
 
       expect(link).toBeInTheDocument();
     });
+  });
+
+  it('should add the active class to an active link', async () => {
+    const { getAllByRole } = render(
+      <ThemeProvider theme={theme}>
+        <MemoryRouter initalEntries={['/characters']}>
+          <Sidebar />
+        </MemoryRouter>
+      </ThemeProvider>,
+    );
+
+    const links = getAllByRole('link');
+
+    const characterLinks = links.filter(link =>
+      link.innerText.includes('Characters'),
+    );
+
+    expect(characterLinks).toHaveLength(1);
+    const characterLink = characterLinks[0];
+    expect(characterLink).toHaveClass('active');
   });
 });

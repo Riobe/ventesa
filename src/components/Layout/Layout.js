@@ -57,9 +57,7 @@ function Layout() {
       <Sidebar />
 
       <Switch>
-        <Route exact path="/">
-          <Redirect to="/characters" />
-        </Route>
+        <Redirect exact from="/" to="/characters" />
 
         <Route path="/characters">
           <CharactersRoute />
