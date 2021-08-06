@@ -1,9 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
-const events = require('../shared/events');
+const channels = require('../shared/channels');
 
 contextBridge.exposeInMainWorld('ipc', {
-  // Settings Events
+  // Settings channels
   requestSettings: async () => {
-    return await ipcRenderer.invoke(events.requestSettings);
+    return await ipcRenderer.invoke(channels.requestSettings);
   },
 });

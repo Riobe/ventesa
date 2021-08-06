@@ -7,7 +7,7 @@ jest.mock('electron', () => ({
 jest.mock('./file-system');
 
 const { ipcMain } = require('electron');
-const events = require('../shared/events');
+const channels = require('../shared/channels');
 const { fileExists, writeJson, readJson } = require('./file-system');
 const path = require('path');
 
@@ -76,7 +76,7 @@ describe('settings', () => {
 
       expect(ipcMain.handle).toHaveBeenCalledTimes(1);
       expect(ipcMain.handle).toHaveBeenCalledWith(
-        events.requestSettings,
+        channels.requestSettings,
         any(Function),
       );
 

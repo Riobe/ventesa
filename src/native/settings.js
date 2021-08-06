@@ -1,7 +1,7 @@
 const { ipcMain } = require('electron');
 const path = require('path');
 
-const events = require('../shared/events');
+const channels = require('../shared/channels');
 const { fileExists, writeJson, readJson } = require('./file-system');
 
 const SETTINGS_FILE_NAME = 'settings.json';
@@ -28,7 +28,7 @@ function handleSettings(userDataPath) {
   const settingsPath = path.join(userDataPath, SETTINGS_FILE_NAME);
   const settingsFileEnsured = ensureSettingsFile(settingsPath);
 
-  ipcMain.handle(events.requestSettings, async () => {
+  ipcMain.handle(channels.requestSettings, async () => {
     await settingsFileEnsured;
 
     return await readJson(settingsPath);

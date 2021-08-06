@@ -1,7 +1,5 @@
-const events = {
+const channels = {
   requestSettings: 'request-settings',
-  settingsRequested: 'settings-requested',
-  settingsAcquired: 'settings-acquired',
 };
 
-module.exports = events;
+module.exports = channels;
