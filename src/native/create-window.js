@@ -9,7 +9,17 @@ const { handleSettings } = require('./settings');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+function registerHandlers(app) {
+  // Magic string acquired via: https://www.electronjs.org/docs/api/app#appgetpathname
+  const userDataPath = app.getPath('userData');
+  handleSettings(userDataPath);
+}
+
 function createWindow(app) {
+  // The handlers have to be registered before the app is loaded or the first invoke
+  // against an event that has no handler will explode the app.
+  registerHandlers(app);
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
@@ -31,8 +41,6 @@ function createWindow(app) {
   } else {
     mainWindow.loadFile(path.join('..', 'build', 'index.html'));
   }
-
-  handleSettings(app, mainWindow);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

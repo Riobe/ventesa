@@ -4,11 +4,12 @@ import { BrowserRouter as Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTheme } from '@chakra-ui/core';
 import { bgColor, breakpoint, BREAKPOINT_SM } from '../../theme';
-import events from '../../../shared/events';
 
 import Sidebar from '../Sidebar';
 import CharactersRoute from '../CharactersRoute';
 import CombatRoute from '../CombatRoute';
+
+const { ipc } = window;
 
 const LayoutGrid = styled.div`
   height: 100%;
@@ -57,20 +58,12 @@ function Layout() {
   const [settings, setSettings] = useState({});
 
   useEffect(() => {
-    // eslint-disable-next-line
-    ipc.send(events.settingsRequested);
+    async function getSettings() {
+      const settingsData = await ipc.requestSettings();
+      setSettings(settingsData);
+    }
 
-    const settingsHandler = (event, settings) => {
-      setSettings(settings);
-    };
-
-    // eslint-disable-next-line
-    ipc.on(events.settingsAcquired, settingsHandler);
-
-    return () => {
-      // eslint-disable-next-line
-      ipc.removeListener(events.settingsAcquired, settingsHandler);
-    };
+    getSettings();
   }, []);
 
   return (

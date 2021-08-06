@@ -1,6 +1,6 @@
 jest.mock('electron', () => ({
   ipcMain: {
-    on: jest.fn(),
+    handle: jest.fn(),
   },
 }));
 
@@ -8,7 +8,7 @@ jest.mock('./file-system');
 
 const { ipcMain } = require('electron');
 const events = require('../shared/events');
-const { fileExists, writeJsonSync, readJsonSync } = require('./file-system');
+const { fileExists, writeJson, readJson } = require('./file-system');
 const path = require('path');
 
 const { any, objectContaining } = expect;
@@ -16,55 +16,35 @@ const { any, objectContaining } = expect;
 const settings = require('./settings');
 
 describe('settings', () => {
-  let app;
-  let window;
+  const testUserDataPath = '~/.config/ventesa';
+  const expectedPath = path.join(testUserDataPath, 'settings.json');
 
   beforeEach(() => {
-    ipcMain.on.mockClear();
+    ipcMain.handle.mockClear();
 
     fileExists.mockReset();
-    fileExists.mockReturnValue(true);
+    fileExists.mockResolvedValue(true);
 
-    writeJsonSync.mockClear();
+    writeJson.mockClear();
 
-    readJsonSync.mockReset();
-    readJsonSync.mockReturnValue({});
-
-    app = {
-      getPath: jest.fn(),
-    };
-
-    window = {
-      webContents: {
-        send: jest.fn(),
-      },
-    };
+    readJson.mockReset();
+    readJson.mockResolvedValue({});
   });
 
   describe('handleSettings', () => {
-    const testPath = 'testPath/';
-    const expectedPath = path.join(testPath, 'settings.json');
-
-    beforeEach(() => {
-      app.getPath.mockReturnValue(testPath);
-    });
-
-    it('should look for the settings.json file in the userData directory.', async () => {
-      settings.handleSettings(app, window);
-
-      expect(app.getPath).toHaveBeenCalledWith('userData');
-    });
-
     it('should create the settings.json file if it does not exist.', async () => {
-      fileExists.mockReturnValue(false);
+      fileExists.mockResolvedValue(false);
 
-      settings.handleSettings(app, window);
+      settings.handleSettings(testUserDataPath);
 
       expect(fileExists).toHaveBeenCalledTimes(1);
       expect(fileExists).toHaveBeenCalledWith(expectedPath);
 
-      expect(writeJsonSync).toHaveBeenCalledTimes(1);
-      expect(writeJsonSync).toHaveBeenCalledWith(
+      const fileExistsResult = fileExists.mock.results[0].value;
+      await fileExistsResult;
+
+      expect(writeJson).toHaveBeenCalledTimes(1);
+      expect(writeJson).toHaveBeenCalledWith(
         expectedPath,
         objectContaining({
           debug: false,
@@ -73,45 +53,42 @@ describe('settings', () => {
     });
 
     it('should not create the settings.json file if it exists.', async () => {
-      settings.handleSettings(app, window);
+      settings.handleSettings(testUserDataPath);
 
       expect(fileExists).toHaveBeenCalledTimes(1);
       expect(fileExists).toHaveBeenCalledWith(expectedPath);
 
-      expect(writeJsonSync).toHaveBeenCalledTimes(0);
+      expect(writeJson).toHaveBeenCalledTimes(0);
     });
 
     it('should read the data from the settings.json file.', async () => {
-      settings.handleSettings(app, window);
+      settings.handleSettings(testUserDataPath);
 
-      const handler = ipcMain.on.mock.calls[0][1];
-      handler();
+      const handler = ipcMain.handle.mock.calls[0][1];
+      await handler();
 
-      expect(readJsonSync).toHaveBeenCalledTimes(1);
-      expect(readJsonSync).toHaveBeenCalledWith(expectedPath);
+      expect(readJson).toHaveBeenCalledTimes(1);
+      expect(readJson).toHaveBeenCalledWith(expectedPath);
     });
 
     it('should return settings data in a settingsAcquired event when a settingsRequested event comes in.', async () => {
-      settings.handleSettings(app, window);
+      settings.handleSettings(testUserDataPath);
 
-      expect(ipcMain.on).toHaveBeenCalledTimes(1);
-      expect(ipcMain.on).toHaveBeenCalledWith(
-        events.settingsRequested,
+      expect(ipcMain.handle).toHaveBeenCalledTimes(1);
+      expect(ipcMain.handle).toHaveBeenCalledWith(
+        events.requestSettings,
         any(Function),
       );
 
-      const handler = ipcMain.on.mock.calls[0][1];
-      expect(window.webContents.send).toHaveBeenCalledTimes(0);
+      const handler = ipcMain.handle.mock.calls[0][1];
 
-      handler();
+      expect(readJson).toHaveBeenCalledTimes(0);
+      const result = await handler();
+      expect(readJson).toHaveBeenCalledTimes(1);
+      expect(readJson).toHaveBeenCalledWith(expectedPath);
 
-      const settingsData = readJsonSync.mock.results[0].value;
-
-      expect(window.webContents.send).toHaveBeenCalledTimes(1);
-      expect(window.webContents.send).toHaveBeenCalledWith(
-        events.settingsAcquired,
-        settingsData,
-      );
+      const settingsData = await readJson.mock.results[0].value;
+      expect(settingsData).toBe(result);
     });
   });
 });

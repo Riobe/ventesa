@@ -12,6 +12,8 @@ const { any, objectContaining } = expect;
 const createWindow = require('./create-window');
 
 describe('createWindow', () => {
+  const paths = { userData: '~/.config/ventesa' };
+
   let app;
   let window;
 
@@ -34,7 +36,10 @@ describe('createWindow', () => {
 
     app = {
       on: jest.fn(),
+      getPath: jest.fn(),
     };
+
+    app.getPath.mockImplementation(path => paths[path]);
   });
 
   it('should make a BrowserWindow.', async () => {
@@ -52,7 +57,7 @@ describe('createWindow', () => {
     );
   });
 
-  it('should make a BrowserWindow with recommended security settings.', async () => {
+  it('should make a secure BrowserWindow with recommended security settings.', async () => {
     createWindow(app);
 
     expect(BrowserWindow).toHaveBeenCalledTimes(1);
@@ -84,7 +89,7 @@ describe('createWindow', () => {
     createWindow(app);
 
     expect(handleSettings).toHaveBeenCalledTimes(1);
-    expect(handleSettings).toHaveBeenCalledWith(app, window);
+    expect(handleSettings).toHaveBeenCalledWith(paths.userData);
   });
 
   it('should handle the closed event on the main window.', async () => {
