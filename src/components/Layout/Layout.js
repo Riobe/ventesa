@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { useTheme } from '@chakra-ui/core';
