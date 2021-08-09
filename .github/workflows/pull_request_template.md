@@ -1,6 +1,6 @@
 # Trello Card
 
-TRELLO-
+Resolves [Trello Card Title](<Trello Link>)
 
 # Description of changes
 
