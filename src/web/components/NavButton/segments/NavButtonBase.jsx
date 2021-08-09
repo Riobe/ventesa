@@ -1,6 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-import { useTheme } from '@chakra-ui/core';
 
 const color = colorName => ({ theme }) => theme.colors[colorName];
 
@@ -33,15 +31,4 @@ const NavButtonBase = styled.button`
   }
 `;
 
-/**
- * Handles navigation in multi-action buttons
- */
-const NavButton = React.forwardRef((props, ref) => {
-  const theme = useTheme();
-
-  return <NavButtonBase ref={ref} theme={theme} {...props} />;
-});
-
-NavButton.displayName = 'NavButton';
-
-export default NavButton;
+export default NavButtonBase;

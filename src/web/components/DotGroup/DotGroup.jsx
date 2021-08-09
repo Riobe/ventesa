@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import Dot from '../Dot';
 
-const DotGroupContainer = styled.div`
-  display: flex;
-  width: min-content;
-`;
+import { DotGroupContainer } from './segments';
 
 /**
  * ## Features

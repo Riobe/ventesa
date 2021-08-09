@@ -1,6 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-import { useTheme } from '@chakra-ui/core';
 
 const VerticalDividerElement = styled.div`
   margin: auto 1rem;
@@ -12,10 +10,4 @@ const VerticalDividerElement = styled.div`
   border-radius: 3px;
 `;
 
-function VerticalDivider() {
-  const theme = useTheme();
-
-  return <VerticalDividerElement theme={theme} />;
-}
-
-export default VerticalDivider;
+export default VerticalDividerElement;

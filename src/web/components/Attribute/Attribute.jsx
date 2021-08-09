@@ -1,25 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { useTheme } from '@chakra-ui/core';
 
 import DotGroup from '../DotGroup';
 
-import { text } from '../../theme/helpers';
-
-const AttributeRow = styled.div.attrs({
-  className: 'AttributeRow',
-})`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const AttributeLabel = styled.label.attrs({
-  className: 'AttributeLabel',
-})`
-  font-weight: 800;
-  color: ${text('normal')};
-`;
+import { AttributeRow, AttributeLabel } from './segments';
 
 /**
  * An `Attribute` in Exalted is a value between 1-5. It cannot have a
