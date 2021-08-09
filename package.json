@@ -51,7 +51,7 @@
     "start": "concurrently -n react,electron,storybook \"npm run react\" \"npm run electron\" \"npm run storybook\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "react": "BROWSER=none react-scripts start",
+    "react": "(export BROWSER=none || set BROWSER=none && react-scripts start)",
     "electron": "electron .",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",

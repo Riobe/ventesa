@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { useTheme } from '@chakra-ui/core';
@@ -47,12 +47,6 @@ const Title = styled.header`
   }
 `;
 
-const Content = styled.section`
-  grid-area: content;
-
-  color: white;
-`;
-
 function Layout() {
   const theme = useTheme();
   const [settings, setSettings] = useState({});
@@ -75,18 +69,25 @@ function Layout() {
       <Sidebar />
 
       <Switch>
-        <Route exact path="/">
-          <Content theme={theme}>
-            <pre>Settings: {JSON.stringify(settings, null, 2)}</pre>
-            <div>Debug Mode: {(!!settings.debug).toString()}</div>
-          </Content>
-        </Route>
+        <Redirect exact from="/" to="/characters" />
 
-        <Route exact path="/characters">
+        <Route path="/characters">
           <CharactersRoute />
         </Route>
 
-        <Route exact path="/combat">
+        <Route path="/charms">
+          <h1>charms</h1>
+        </Route>
+
+        <Route path="/qualities">
+          <h1>qualities</h1>
+        </Route>
+
+        <Route path="/equipment">
+          <h1>equipment</h1>
+        </Route>
+
+        <Route path="/combat">
           <CombatRoute />
         </Route>
       </Switch>

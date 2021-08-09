@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { Icon, useTheme } from '@chakra-ui/core';
 
 import { accent, bgColor } from '../../theme';
 
-const NavLinkStyled = styled(Link)`
+const NavLinkStyled = styled(NavLink)`
   display: grid;
   grid-template-columns: 55px auto;
   grid-template-rows: 1fr;
@@ -23,6 +23,11 @@ const NavLinkStyled = styled(Link)`
     color: ${accent('primary')};
 
     cursor: pointer;
+  }
+
+  &.active {
+    color: ${accent('primary')};
+    border-right: 3px solid ${accent('primary')};
   }
 `;
 
@@ -56,24 +61,6 @@ const NavButtons = styled.div`
   }
 `;
 
-const NavWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 55px auto;
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  margin-bottom: 30px;
-
-  justify-items: center;
-  align-items: center;
-
-  &:hover {
-    color: ${accent('primary')};
-
-    cursor: pointer;
-  }
-`;
-
 const NavSettings = styled.div`
   display: flex;
   flex-direction: column;
@@ -92,7 +79,7 @@ const ExpandArrow = styled.div`
 
   position: absolute;
   right: -15px;
-  top: 50px;
+  top: 70px;
 
   z-index: 10;
 `;
@@ -126,18 +113,9 @@ const ICON_SIZE = '36px';
 
 const buttons = [
   {
-    icon: 'home',
-    text: 'Home',
-    link: '/',
-  },
-  {
-    icon: 'book',
-    text: 'Narrative Mode',
-  },
-  {
-    icon: 'shield',
-    text: 'Combat Mode',
-    link: '/combat',
+    icon: 'players',
+    text: 'Characters',
+    link: '/characters',
   },
   {
     icon: 'charms',
@@ -145,9 +123,19 @@ const buttons = [
     link: '/charms',
   },
   {
-    icon: 'players',
-    text: 'Characters',
-    link: '/characters',
+    icon: 'book',
+    text: 'Qualities',
+    link: '/qualities',
+  },
+  {
+    icon: 'shield',
+    text: 'Equipment',
+    link: '/equipment',
+  },
+  {
+    icon: 'fist',
+    text: 'Combat Mode',
+    link: '/combat',
   },
 ];
 
@@ -163,6 +151,7 @@ function Sidebar() {
             <NavLinkStyled
               theme={theme}
               key={button.text}
+              activeClassName="active"
               to={button.link || '/'}
             >
               <Icon name={button.icon} size={ICON_SIZE} />
