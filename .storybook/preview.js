@@ -5,8 +5,8 @@ import { ThemeProvider, useTheme } from '@chakra-ui/core';
 import { themes } from '@storybook/theming';
 import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
 
-import customTheme from '../src/theme';
-import { bgColor } from '../src/theme/helpers';
+import customTheme from '../src/web/theme';
+import { bgColor } from '../src/web/theme/helpers';
 
 const CanvasElement = styled.main`
   background-color: ${bgColor('primary')};

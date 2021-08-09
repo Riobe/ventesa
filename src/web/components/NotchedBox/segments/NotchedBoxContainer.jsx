@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { bgColor } from '../../theme';
+import { bgColor } from '../../../theme';
 
 const NotchedBoxContent = styled.div`
   --notchSize: ${props => props.notchSize};
