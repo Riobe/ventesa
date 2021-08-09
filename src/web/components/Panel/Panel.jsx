@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { useTheme } from '@chakra-ui/core';
 
-const PanelDiv = styled.div`
-  background-color: ${({ theme }) => theme.colors.background.panel};
-`;
+import { PanelDiv } from './segments';
 
 function Panel({ children, ...props }) {
   const theme = useTheme();
