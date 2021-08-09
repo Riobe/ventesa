@@ -27,7 +27,7 @@ function Layout() {
   return (
     <LayoutGrid id="Layout" theme={theme}>
       <Title theme={theme}>
-        <h1>Exalted VTT</h1>
+        <h1>Vetesa</h1>
       </Title>
 
       <Sidebar />
