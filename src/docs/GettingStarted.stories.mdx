@@ -17,14 +17,17 @@ This is where we put the static files that aren't built and bundled. The index.h
 `<project-directory>/src`:  
 The `src` directory is where all of our application and UI files go. This is the stuff that will get buncled up when the project is built. Files at the root directory include the entry point to the project `index.js`, the entry point for electron, and other root level items that are intended to get the project going.
 
-`<project-directory>/src/components`:  
+`<project-directory>/src/web/components`:  
 The `components/` directory is where all of our custom React components will be put. We'll spend a lot of time here. Subdirectories for groups of components can be added, and each component gets it's own directory with a barrel (index.js to export it), it's file, it's tests, and it's stories (if relevant).
+
+`<project-directory>/src/web/theme`:  
+The theme directory is for everything around site-wide theme elements: Our breakpoints, colors, icons, etc. Please add new SVG icons under the `icons/` directory in this spot.
 
 `<project-directory>/src/docs`:  
 Where the storybook docs not tied to a particular component go. This documentation itself is in this directory. These use mdx which is a mix of Markdown syntax and JSX.
 
-`<project-directory>/src/theme`:  
-The theme directory is for everything around site-wide theme elements: Our breakpoints, colors, icons, etc. Please add new SVG icons under the `icons/` directory in this spot.
+`<project-directory>/src/native`:  
+The main process code from electron, that runs outside of Chrome and can do anything node can do is in this folder.
 
 `<project-directory>/src/*`:  
 The rest is probably still being worked on and isn't set in stone (or we need to update the documentation!).
