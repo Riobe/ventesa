@@ -10,7 +10,7 @@ describe('DotGroup', () => {
       const dotGroup = getByRole('radiogroup');
 
       expect(dotGroup).toBeInTheDocument();
-      expect(dotGroup).not.toBeEmpty();
+      expect(dotGroup).not.toBeEmptyDOMElement();
       expect(dotGroup).toHaveClass('DotGroup');
     });
 

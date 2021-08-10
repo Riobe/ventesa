@@ -13,7 +13,7 @@
     "@chakra-ui/core": "0.8.0",
     "@emotion/core": "10.1.1",
     "@emotion/styled": "10.0.27",
-    "electron": "9.4.4",
+    "electron": "13.1.8",
     "electron-is-dev": "^2.0.0",
     "electron-reload": "^2.0.0-alpha.1",
     "emotion-theming": "10.0.27",
@@ -37,9 +37,9 @@
     "@storybook/preset-create-react-app": "3.2.0",
     "@storybook/react": "6.3.6",
     "@storybook/theming": "6.3.6",
-    "@testing-library/jest-dom": "4.2.4",
-    "@testing-library/react": "9.5.0",
-    "@testing-library/user-event": "7.2.1",
+    "@testing-library/jest-dom": "5.14.1",
+    "@testing-library/react": "12.0.0",
+    "@testing-library/user-event": "13.2.1",
     "concurrently": "5.2.0",
     "eslint-config-prettier": "6.15.0",
     "eslint-plugin-jest": "23.20.0",
@@ -62,8 +62,10 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
+    ],
+    "*.jsx": [
+      "eslint --fix"
     ]
   },
   "eslintConfig": {
