@@ -9,7 +9,7 @@ describe('Dot', () => {
     const dot = getByRole('radio');
 
     expect(dot).toBeInTheDocument();
-    expect(dot).toBeEmpty();
+    expect(dot).toBeEmptyDOMElement();
     expect(dot).toHaveClass('Dot');
   });
 
