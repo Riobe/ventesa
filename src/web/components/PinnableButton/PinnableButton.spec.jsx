@@ -37,7 +37,7 @@ describe('PinnableButton', () => {
 
     buttons.forEach(button => {
       expect(button).toBeInTheDocument();
-      expect(button).not.toBeEmpty();
+      expect(button).not.toBeEmptyDOMElement();
     });
 
     expect(buttons[0]).toHaveClass('PinnableButtonPin');
@@ -64,7 +64,7 @@ describe('PinnableButton', () => {
 
     buttons.forEach(button => {
       expect(button).toBeInTheDocument();
-      expect(button).not.toBeEmpty();
+      expect(button).not.toBeEmptyDOMElement();
     });
 
     expect(buttons[0]).toHaveClass('PinnableButtonPin');

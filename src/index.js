@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@chakra-ui/core';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -12,13 +12,13 @@ import './index.css';
 console.log('In Renderer');
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <ThemeProvider theme={theme}>
+  <StrictMode>
+    <ThemeProvider theme={theme}>
+      <Router>
         <Layout />
-      </ThemeProvider>
-    </Router>
-  </React.StrictMode>,
+      </Router>
+    </ThemeProvider>
+  </StrictMode>,
   document.getElementById('root'),
 );
 

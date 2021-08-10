@@ -74,7 +74,7 @@ describe('settings', () => {
     it('should return settings data in a settingsAcquired event when a settingsRequested event comes in.', async () => {
       settings.handleSettings(testUserDataPath);
 
-      expect(ipcMain.handle).toHaveBeenCalledTimes(1);
+      expect(ipcMain.handle).toHaveBeenCalledTimes(2);
       expect(ipcMain.handle).toHaveBeenCalledWith(
         channels.requestSettings,
         any(Function),

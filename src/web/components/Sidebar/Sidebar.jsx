@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Icon, useTheme } from '@chakra-ui/core';
 
 import {
@@ -40,15 +41,23 @@ const buttons = [
   },
 ];
 
-function Sidebar() {
+function Sidebar({ showDebug }) {
   const theme = useTheme();
+
+  const navButtons = showDebug
+    ? buttons.concat({
+        icon: 'sun',
+        text: 'Debug',
+        link: '/debug',
+      })
+    : buttons;
 
   return (
     <Nav theme={theme} className="Sidebar">
       <ExpandArrow theme={theme} />
       <ExpandableNav theme={theme}>
         <NavButtons>
-          {buttons.map(button => (
+          {navButtons.map(button => (
             <NavLinkStyled
               theme={theme}
               key={button.text}
@@ -62,11 +71,22 @@ function Sidebar() {
         </NavButtons>
 
         <NavSettings>
-          <Icon name="settings" color="white" size={ICON_SIZE} />
+          <NavLinkStyled theme={theme} activeClassName="active" to="/settings">
+            <Icon name="settings" size={ICON_SIZE} />
+            <div className="nav-link">Settings</div>
+          </NavLinkStyled>
         </NavSettings>
       </ExpandableNav>
     </Nav>
   );
 }
+
+Sidebar.propTypes = {
+  showDebug: PropTypes.bool.isRequired,
+};
+
+Sidebar.defaultProps = {
+  showDebug: false,
+};
 
 export default Sidebar;

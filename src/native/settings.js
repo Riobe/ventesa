@@ -33,6 +33,10 @@ function handleSettings(userDataPath) {
 
     return await readJson(settingsPath);
   });
+
+  ipcMain.handle(channels.saveSettings, async (event, settings) => {
+    return await writeJson(settingsPath, settings);
+  });
 }
 
 module.exports = {
