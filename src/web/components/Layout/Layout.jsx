@@ -14,7 +14,7 @@ import CombatRoute from '../routes/CombatRoute';
 import DebugRoute from '../routes/DebugRoute';
 import SettingsRoute from '../routes/SettingsRoute';
 
-import { ContentArea, LayoutGrid, Title } from './segements';
+import { ContentArea, LayoutGrid, Title } from './segments';
 
 const { ipc } = window;
 
