@@ -13,4 +13,7 @@ const exaltedType = {
   chosen: 'chosen',
 };
 
-module.exports = exaltedType;
+module.exports = {
+  exaltedType,
+  exaltedTypeArray: Object.values(exaltedType),
+};

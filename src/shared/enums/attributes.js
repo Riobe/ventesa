@@ -4,4 +4,7 @@ const attributes = {
   fortitude: 'fortitude',
 };
 
-module.exports = attributes;
+module.exports = {
+  attributes,
+  attributesArray: Object.values(attributes),
+};

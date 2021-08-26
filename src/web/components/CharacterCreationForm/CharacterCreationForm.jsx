@@ -1,57 +1,146 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Formik, Form, useField } from 'formik';
+import { Formik, Form } from 'formik';
+import { fullCharacterSchema } from '../../../shared/enums/CharacterValidation';
 
-import { CharacterInputFields } from './segments';
+import { CharacterInputField } from './segments';
+import { CharacterDropdownField } from './segments';
+import { CharacterInitalValues } from './segments';
+import { CharacterTextareaField } from './segments';
+
+import { FormStyle } from './segments';
+
+import { abilitiesArray } from '../../../shared/enums/abilities';
+import { attributesArray } from '../../../shared/enums/attributes';
+import { exaltedTypeArray } from '../../../shared/enums/exalted-type';
 
 function CharacterCreationForm() {
   return (
     <>
       <h1>Create your Essence Character</h1>
+
       <Formik
+        initialValues={CharacterInitalValues}
+        validationSchema={fullCharacterSchema}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          setSubmitting(false);
         }}
       >
-        <Form>
-          <CharacterInputFields
-            label="Character Name"
-            name="Name"
-            type="text"
-            placeholder="Name"
-          />
+        {({ isValid, dirty, isSubmitting }) => (
+          <Form>
+            <FormStyle>
+              <CharacterInputField
+                id="name"
+                label="Exalt Name"
+                name="name"
+                type="text"
+                placeholder="Required"
+              />
 
-          <CharacterInputFields
-            label="Exalt Type"
-            name="Exalt Type"
-            type="select"
-            placeholder="Name"
-          />
+              <CharacterTextareaField
+                id="description"
+                label="description"
+                name="description"
+                type="textarea"
+                placeholder="Required"
+              />
 
-          <CharacterInputFields
-            label="Force"
-            name="Force"
-            type="number"
-            placeholder="0"
-          />
+              <CharacterDropdownField
+                id="exaltType"
+                label="Exalt Type"
+                name="exaltType"
+                type="text"
+              >
+                <option value="">Select an Exalt type</option>
 
-          <CharacterInputFields
-            label="Finesse"
-            name="Finesse"
-            type="number"
-            placeholder="0"
-          />
+                {exaltedTypeArray.map(exalt => {
+                  return (
+                    <option id={exalt} name={exalt} value={exalt} key={exalt}>
+                      {exalt}
+                    </option>
+                  );
+                })}
+              </CharacterDropdownField>
 
-          <CharacterInputFields
-            label="Fortitude"
-            name="Fortitude"
-            type="number"
-            placeholder="0"
-          />
-        </Form>
+              <CharacterInputField
+                id="essence"
+                label="essence"
+                name="essence"
+                type="number"
+              />
+
+              <CharacterInputField
+                id="motes"
+                label="motes"
+                name="motes"
+                type="number"
+              />
+
+              <CharacterInputField
+                id="soak"
+                label="soak"
+                name="soak"
+                type="number"
+              />
+              <CharacterInputField
+                id="hardness"
+                label="hardness"
+                name="hardness"
+                type="number"
+              />
+              <CharacterInputField
+                id="parry"
+                label="parry"
+                name="parry"
+                type="number"
+              />
+              <CharacterInputField
+                id="evasion"
+                label="evasion"
+                name="evasion"
+                type="number"
+              />
+              <CharacterInputField
+                id="resolve"
+                label="resolve"
+                name="resolve"
+                type="number"
+              />
+
+              {attributesArray.map(attribute => {
+                return (
+                  <CharacterInputField
+                    id={attribute}
+                    label={attribute}
+                    name={attribute}
+                    type="number"
+                    placeholder="0"
+                    key={attribute}
+                  />
+                );
+              })}
+
+              {abilitiesArray.map(ability => {
+                return (
+                  <CharacterInputField
+                    id={ability}
+                    label={ability}
+                    name={ability}
+                    type="number"
+                    placeholder={0}
+                    key={ability}
+                  />
+                );
+              })}
+            </FormStyle>
+            <button
+              data-test="example"
+              type="sumbit"
+              disabled={!isValid || !dirty || isSubmitting}
+            >
+              Submit
+            </button>
+          </Form>
+        )}
       </Formik>
     </>
   );

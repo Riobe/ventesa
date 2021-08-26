@@ -41,7 +41,7 @@ function Layout() {
   return (
     <LayoutGrid id="Layout" theme={theme}>
       <Title theme={theme}>
-        <h1>Vetesa</h1>
+        <h1>Ventesa</h1>
       </Title>
 
       <SettingsProvider value={settings}>
