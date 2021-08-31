@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { useField } from 'formik';
 
-function CharacterTextBoxField({ label, id, name, ...props }) {
+function TextAreaField({ label, id, name, ...props }) {
   const [field, meta] = useField({ name });
 
   return (
@@ -25,10 +25,10 @@ function CharacterTextBoxField({ label, id, name, ...props }) {
   );
 }
 
-CharacterTextBoxField.propTypes = {
+TextAreaField.propTypes = {
   label: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
 
-export default CharacterTextBoxField;
+export default TextAreaField;

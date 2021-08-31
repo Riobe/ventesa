@@ -1,9 +1,9 @@
 import React from 'react';
 
-import CharacterCreationForm from '../../CharacterCreationForm';
+import FullCharactersForm from '../../forms/FullCharacterForm';
 
 function CharactersRoute() {
-  return <CharacterCreationForm />;
+  return <FullCharactersForm />;
 }
 
 export default CharactersRoute;

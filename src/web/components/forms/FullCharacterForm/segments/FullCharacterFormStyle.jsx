@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const FormStyle = styled.div`
+const FullCharacterFormStyle = styled.div`
 /* removing default browser styles */
 
   textarea, input, select {outline: none};
@@ -47,4 +47,4 @@ const FormStyle = styled.div`
 
 `;
 
-export default FormStyle;
+export default FullCharacterFormStyle;

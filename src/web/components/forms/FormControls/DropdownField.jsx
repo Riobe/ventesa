@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import { useField } from 'formik';
 
-function CharacterInputField({ label, id, ...props }) {
-  const [field, meta] = useField(props);
+function DropdownField({ label, id, name, ...props }) {
+  const [field, meta] = useField(name);
 
   return (
     <div>
@@ -12,8 +12,10 @@ function CharacterInputField({ label, id, ...props }) {
         <label htmlFor={id}>{label}</label>
         <div className="asterisk">*</div>
       </div>
-      <input
-        className={`text-input ${meta.error && meta.touched ? 'invalid' : ''}`}
+      <select
+        className={`dropdown-select ${
+          meta.error && meta.touched ? 'invalid' : ''
+        }`}
         id={id}
         {...field}
         {...props}
@@ -25,11 +27,10 @@ function CharacterInputField({ label, id, ...props }) {
   );
 }
 
-CharacterInputField.propTypes = {
+DropdownField.propTypes = {
   label: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  name: PropTypes.string,
 };
 
-export default CharacterInputField;
+export default DropdownField;

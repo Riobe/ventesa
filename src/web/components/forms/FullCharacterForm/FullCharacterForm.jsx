@@ -1,17 +1,18 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { fullCharacterSchema } from '../../../shared/enums/CharacterValidation';
+import { fullCharacterSchema } from '../../../../shared/enums/CharacterValidation.jsx';
 
-import { CharacterInputField } from './segments';
-import { CharacterDropdownField } from './segments';
-import { CharacterInitalValues } from './segments';
-import { CharacterTextareaField } from './segments';
+import { FullCharacterInitalValues } from './segments';
 
-import { FormStyle } from './segments';
+import { InputField } from '../FormControls';
+import { DropdownField } from '../FormControls';
+import { TextAreaField } from '../FormControls';
 
-import { abilitiesArray } from '../../../shared/enums/abilities';
-import { attributesArray } from '../../../shared/enums/attributes';
-import { exaltedTypeArray } from '../../../shared/enums/exalted-type';
+import { FullCharacterFormStyle } from './segments';
+
+import { abilitiesArray } from '../../../../shared/enums/abilities';
+import { attributesArray } from '../../../../shared/enums/attributes';
+import { exaltedTypeArray } from '../../../../shared/enums/exalted-type';
 
 function CharacterCreationForm() {
   return (
@@ -19,7 +20,7 @@ function CharacterCreationForm() {
       <h1>Create your Essence Character</h1>
 
       <Formik
-        initialValues={CharacterInitalValues}
+        initialValues={FullCharacterInitalValues}
         validationSchema={fullCharacterSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false);
@@ -27,8 +28,8 @@ function CharacterCreationForm() {
       >
         {({ isValid, dirty, isSubmitting }) => (
           <Form>
-            <FormStyle>
-              <CharacterInputField
+            <FullCharacterFormStyle>
+              <InputField
                 id="name"
                 label="Exalt Name"
                 name="name"
@@ -36,7 +37,7 @@ function CharacterCreationForm() {
                 placeholder="Required"
               />
 
-              <CharacterTextareaField
+              <TextAreaField
                 id="description"
                 label="description"
                 name="description"
@@ -44,7 +45,7 @@ function CharacterCreationForm() {
                 placeholder="Required"
               />
 
-              <CharacterDropdownField
+              <DropdownField
                 id="exaltType"
                 label="Exalt Type"
                 name="exaltType"
@@ -59,47 +60,32 @@ function CharacterCreationForm() {
                     </option>
                   );
                 })}
-              </CharacterDropdownField>
+              </DropdownField>
 
-              <CharacterInputField
+              <InputField
                 id="essence"
                 label="essence"
                 name="essence"
                 type="number"
               />
 
-              <CharacterInputField
-                id="motes"
-                label="motes"
-                name="motes"
-                type="number"
-              />
+              <InputField id="motes" label="motes" name="motes" type="number" />
 
-              <CharacterInputField
-                id="soak"
-                label="soak"
-                name="soak"
-                type="number"
-              />
-              <CharacterInputField
+              <InputField id="soak" label="soak" name="soak" type="number" />
+              <InputField
                 id="hardness"
                 label="hardness"
                 name="hardness"
                 type="number"
               />
-              <CharacterInputField
-                id="parry"
-                label="parry"
-                name="parry"
-                type="number"
-              />
-              <CharacterInputField
+              <InputField id="parry" label="parry" name="parry" type="number" />
+              <InputField
                 id="evasion"
                 label="evasion"
                 name="evasion"
                 type="number"
               />
-              <CharacterInputField
+              <InputField
                 id="resolve"
                 label="resolve"
                 name="resolve"
@@ -108,7 +94,7 @@ function CharacterCreationForm() {
 
               {attributesArray.map(attribute => {
                 return (
-                  <CharacterInputField
+                  <InputField
                     id={attribute}
                     label={attribute}
                     name={attribute}
@@ -121,7 +107,7 @@ function CharacterCreationForm() {
 
               {abilitiesArray.map(ability => {
                 return (
-                  <CharacterInputField
+                  <InputField
                     id={ability}
                     label={ability}
                     name={ability}
@@ -131,7 +117,7 @@ function CharacterCreationForm() {
                   />
                 );
               })}
-            </FormStyle>
+            </FullCharacterFormStyle>
             <button
               data-test="example"
               type="sumbit"

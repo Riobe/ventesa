@@ -1,4 +1,4 @@
-const CharacterInitalValues = {
+const FullCharacterInitalValues = {
   name: '',
   exaltType: '',
   description: '',
@@ -29,4 +29,4 @@ const CharacterInitalValues = {
   war: 0,
 };
 
-export default CharacterInitalValues;
+export default FullCharacterInitalValues;
