@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, waitFor, fireEvent } from '@testing-library/react';
 
-import CharacterCreationForm from './CharacterCreationForm';
+import FullCharacterForm from './FullCharacterForm.jsx';
 describe('Form rendering and validation', () => {
   let fillOutForm;
   let queries;
 
   beforeEach(() => {
-    const containerQueries = render(<CharacterCreationForm />);
+    const containerQueries = render(<FullCharacterForm />);
     queries = containerQueries;
 
     const { getByLabelText } = queries;
