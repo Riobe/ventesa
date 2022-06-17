@@ -14,7 +14,7 @@ import CombatRoute from '../routes/CombatRoute';
 import DebugRoute from '../routes/DebugRoute';
 import SettingsRoute from '../routes/SettingsRoute';
 
-import { ContentArea, LayoutGrid, Title } from './segements';
+import { ContentArea, LayoutGrid, Title } from './segments';
 
 const { ipc } = window;
 
@@ -41,7 +41,7 @@ function Layout() {
   return (
     <LayoutGrid id="Layout" theme={theme}>
       <Title theme={theme}>
-        <h1>Vetesa</h1>
+        <h1>Ventesa</h1>
       </Title>
 
       <SettingsProvider value={settings}>

@@ -1,0 +1,32 @@
+const FullCharacterInitalValues = {
+  name: '',
+  exaltType: '',
+  description: '',
+  force: 0,
+  finesse: 0,
+  fortitude: 0,
+  soak: 0,
+  hardness: 0,
+  parry: 0,
+  evasion: 0,
+  resolve: 0,
+  essence: 0,
+  motes: 0,
+
+  athletics: 0,
+  awareness: 0,
+  closeCombat: 0,
+  craft: 0,
+  embassy: 0,
+  integrity: 0,
+  navigate: 0,
+  performance: 0,
+  physique: 0,
+  presence: 0,
+  rangedCombat: 0,
+  sagacity: 0,
+  stealth: 0,
+  war: 0,
+};
+
+export default FullCharacterInitalValues;
