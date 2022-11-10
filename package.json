@@ -13,7 +13,7 @@
     "@chakra-ui/core": "0.8.0",
     "@emotion/core": "10.1.1",
     "@emotion/styled": "10.0.27",
-    "electron": "15.5.5",
+    "electron": "18.3.7",
     "electron-is-dev": "^2.0.0",
     "electron-reload": "^2.0.0-alpha.1",
     "emotion-theming": "10.0.27",
